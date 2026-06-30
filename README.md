@@ -11,7 +11,6 @@ A pipeline that ingests candidate data from multiple structured (CSV, ATS JSON) 
 | Language | Python 3.10+ |
 | Data validation & schemas | [Pydantic v2](https://docs.pydantic.dev/latest/) |
 | Environment variables | [python-dotenv](https://pypi.org/project/python-dotenv/) |
-| PDF generation | [ReportLab](https://pypi.org/project/reportlab/) |
 | GitHub API | `urllib` (stdlib, no extra dependencies) |
 | Web UI server | `http.server` (stdlib) |
 | Tests | `unittest` + `pytest` |
@@ -98,15 +97,7 @@ The GitHub profiles under `data/sources/github/` are pre-fetched and committed. 
 
    This calls the GitHub API for each GitHub-linked candidate, writes one JSON file per candidate to `data/sources/github/`, and sleeps 1 second between requests to respect rate limits.
 
-### Generating the Technical Design PDF
 
-To compile the Step 1 technical design one-pager:
-```bash
-python scripts/generate_pdf.py --name "Your Name" --email "your.email@example.com"
-```
-This writes a single-page PDF named `YourName_your.email@example.com_Eightfold.pdf`.
-
----
 
 ## 4. Running the CLI
 
