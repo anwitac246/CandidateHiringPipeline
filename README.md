@@ -41,7 +41,7 @@ Ingest Sources ──► Extract dicts ──► Normalize ──► Merge/Dedup
 - **Matching Key**: Candidate records are grouped using *email* as the primary key. If a record lacks an email (e.g. resumes, notes, or GitHub files), it matches using a fallback of *name + normalized-phone*. If no matches exist, a new group is created.
 - **Trust Tiers**: When sources contain conflicting values, the highest tier wins:
   ```
-  ATS JSON (5) > Recruiter CSV (4) > LinkedIn/GitHub (3) > Resume (2) > Recruiter Notes (1)
+  Resume (5) > ATS JSON (4) > Recruiter CSV (3) > LinkedIn/GitHub (2) > Recruiter Notes (1)
   ```
   For equal trust tiers, the record with the most recent `last_updated` date wins.
 - **In-Source Deduplication**: If multiple records appear within the same source, the record with the newest timestamp is kept as active. The older record's conflicting field values are suppressed from the active profile and logged under `alternatives`.

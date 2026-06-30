@@ -134,7 +134,7 @@ def generate_pdf(name: str, email: str, output_path: str) -> None:
     story.append(Paragraph(
         "<b>• Identity Keys:</b> Candidates are resolved using <i>email</i> as the primary matching key. A fallback match key of <i>name + normalized-phone</i> is applied to merge records lacking an email (e.g., resume or recruiter notes matches). Near-duplicates (e.g., Aman vs Amann Sharma) are protected against incorrect merges.<br/>"
         "<b>• Trust-Tier Hierarchy:</b> Out-of-source conflicts are resolved using a predefined trust hierarchy rank: "
-        "<b>ATS JSON (5) > Recruiter CSV (4) > LinkedIn/GitHub (3) > Resume (2) > Recruiter Notes (1)</b>. "
+        "<b>Resume (5) > ATS JSON (4) > Recruiter CSV (3) > LinkedIn/GitHub (2) > Recruiter Notes (1)</b>. "
         "The highest-ranked source wins. For equal-trust conflicts, the most recently updated record (highest last_updated date) is chosen.<br/>"
         "<b>• Alternatives Logging:</b> Overridden or suppressed values are stored in the <i>alternatives</i> dictionary, documenting "
         "the value, source name, trust score, and suppression reason (e.g., lower_trust, lower_recency, or in_source_duplicate_older).<br/>"

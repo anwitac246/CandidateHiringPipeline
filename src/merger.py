@@ -15,13 +15,14 @@ from src.normalizer import (
 )
 
 TRUST_RANK: dict[str, int] = {
-    "ats_json": 5,
-    "recruiter_csv": 4,
-    "linkedin": 3,
-    "github": 3,
-    "resume": 2,
+    "resume": 5,
+    "ats_json": 4,
+    "recruiter_csv": 3,
+    "linkedin": 2,
+    "github": 2,
     "recruiter_notes": 1,
 }
+
 
 
 def merge_all(

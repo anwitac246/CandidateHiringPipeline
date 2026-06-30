@@ -11,7 +11,7 @@
     "location": {
       "city": "Portland",
       "region": "OR",
-      "country": "US"
+      "country": null
     },
     "links": {
       "linkedin": null,
@@ -22,15 +22,15 @@
     "headline": "Kernel Maintainer",
     "years_experience": 29.0,
     "skills": [
-      "assembly",
+      "bash",
       "c",
       "c++",
+      "gdb",
+      "assembly",
       "git",
       "linux",
       "make",
-      "openscad",
-      "bash",
-      "gdb"
+      "openscad"
     ],
     "experience": [
       {
@@ -38,40 +38,40 @@
         "title": "Kernel Maintainer",
         "start": "2005-01",
         "end": null,
-        "summary": "Leads development and release of the Linux kernel."
+        "summary": "Led development and release cycle of the Linux kernel. Manage contributor review process across thousands of patches per release. Responsible for final merge decisions for all kernel subsystems."
       },
       {
         "company": "OSDL",
         "title": "Fellow",
         "start": "2003-06",
         "end": "2005-01",
-        "summary": "Open Source Development Labs research fellow."
+        "summary": "Research fellow at Open Source Development Labs focused on enterprise Linux adoption."
       },
       {
-        "company": "Transmeta",
+        "company": "Transmeta Corporation",
         "title": "Software Engineer",
         "start": "1997-01",
         "end": "2003-06",
-        "summary": "VLIW processor architecture and Linux kernel portability."
+        "summary": "Worked on VLIW processor architecture and ported Linux to Transmeta hardware platforms."
       }
     ],
     "education": [
       {
         "institution": "University of Helsinki",
-        "degree": "B.Sc.",
-        "field": "Computer Science",
+        "degree": "B.Sc. Computer Science",
+        "field": null,
         "end_year": "1996"
       }
     ],
     "provenance": [
       {
         "field": "full_name",
-        "source": "ats_json",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "ats_json",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -86,22 +86,22 @@
       },
       {
         "field": "emails",
-        "source": "ats_json",
+        "source": "resume",
         "method": "collect_unique"
       },
       {
         "field": "phones",
-        "source": "ats_json",
+        "source": "resume",
         "method": "normalize_e164"
       },
       {
         "field": "location",
-        "source": "ats_json",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
         "field": "links.github",
-        "source": "github",
+        "source": "resume",
         "method": "extract_url"
       },
       {
@@ -111,12 +111,12 @@
       },
       {
         "field": "experience",
-        "source": "ats_json",
+        "source": "resume",
         "method": "take_highest_trust"
       },
       {
         "field": "education",
-        "source": "ats_json",
+        "source": "resume",
         "method": "take_highest_trust"
       }
     ],
@@ -147,11 +147,11 @@
     "headline": "Staff Software Engineer",
     "years_experience": 11.0,
     "skills": [
-      "graphql",
       "javascript",
+      "typescript",
+      "graphql",
       "react",
       "redux",
-      "typescript",
       "css",
       "open-source"
     ],
@@ -236,13 +236,13 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.63,
+    "overall_confidence": 0.422,
     "alternatives": {
       "full_name": [
         {
           "value": "dan",
           "source": "github",
-          "trust": 3,
+          "trust": 2,
           "suppressed_reason": "lower_trust"
         }
       ],
@@ -250,13 +250,13 @@
         {
           "value": "Senior Software Engineer",
           "source": "recruiter_csv",
-          "trust": 4,
+          "trust": 3,
           "suppressed_reason": "lower_trust"
         },
         {
           "value": "Software Engineer II",
           "source": "linkedin",
-          "trust": 3,
+          "trust": 2,
           "suppressed_reason": "lower_trust"
         }
       ]
@@ -274,15 +274,15 @@
     ],
     "location": {
       "city": "Tromsoe",
-      "region": "Troms",
-      "country": "NO"
+      "region": "Norway",
+      "country": null
     },
     "links": {
       "linkedin": null,
       "github": "https://github.com/sindresorhus",
-      "portfolio": "https://sindresorhus.com/apps",
+      "portfolio": "https://sindresorhus.com",
       "other": [
-        "https://sindresorhus.com"
+        "https://sindresorhus.com/apps"
       ]
     },
     "headline": "Open Source Maintainer",
@@ -325,12 +325,12 @@
     "provenance": [
       {
         "field": "full_name",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -345,7 +345,7 @@
       },
       {
         "field": "emails",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "collect_unique"
       },
       {
@@ -355,7 +355,7 @@
       },
       {
         "field": "location",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
@@ -379,7 +379,7 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.564,
+    "overall_confidence": 0.627,
     "alternatives": null,
     "raw_notes": null
   },
@@ -394,8 +394,8 @@
     ],
     "location": {
       "city": "Pune",
-      "region": "Maharashtra",
-      "country": "IN"
+      "region": "India",
+      "country": null
     },
     "links": {
       "linkedin": null,
@@ -406,45 +406,57 @@
     "headline": "Backend Engineer",
     "years_experience": 3.0,
     "skills": [
+      "microservices",
+      "mysql",
+      "redis",
+      "spring mvc",
       "docker",
       "java",
       "kafka",
       "postgres",
       "rest",
-      "spring",
-      "microservices",
-      "mysql",
-      "redis",
-      "spring mvc"
+      "spring"
     ],
     "experience": [
       {
-        "company": "Razorpay",
+        "company": "Razorpay, Pune",
         "title": "Backend Engineer",
         "start": "2023-01",
         "end": null,
-        "summary": "Builds and owns payment gateway microservices."
+        "summary": "Built and own payment gateway microservices handling 2M transactions per day. Reduced p99 latency by 40% through async processing redesign. Tech: Java, Spring Boot, Kafka, PostgreSQL, Docker, Redis"
       },
       {
-        "company": "Infosys",
+        "company": "Infosys, Pune",
         "title": "Associate Software Engineer",
         "start": "2021-07",
         "end": "2022-12",
-        "summary": "Java backend development for banking clients."
+        "summary": "Java backend development for a UK banking client. Developed REST APIs for account management and transaction history. Tech: Java, Spring MVC, Oracle DB"
       }
     ],
     "education": [
       {
-        "institution": "NIT Trichy",
-        "degree": "B.Tech",
-        "field": "Computer Science",
-        "end_year": "2021"
+        "institution": "B.Tech Computer Science",
+        "degree": "B.Tech Computer Science",
+        "field": null,
+        "end_year": null
+      },
+      {
+        "institution": "Trichy",
+        "degree": "National Institute of Technology",
+        "field": null,
+        "end_year": null
+      },
+      {
+        "institution": null,
+        "degree": null,
+        "field": null,
+        "end_year": "2017"
       }
     ],
     "provenance": [
       {
         "field": "full_name",
-        "source": "ats_json",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -464,17 +476,17 @@
       },
       {
         "field": "emails",
-        "source": "ats_json",
+        "source": "resume",
         "method": "collect_unique"
       },
       {
         "field": "phones",
-        "source": "ats_json",
+        "source": "resume",
         "method": "normalize_e164"
       },
       {
         "field": "location",
-        "source": "ats_json",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
@@ -484,16 +496,16 @@
       },
       {
         "field": "experience",
-        "source": "ats_json",
+        "source": "resume",
         "method": "take_highest_trust"
       },
       {
         "field": "education",
-        "source": "ats_json",
+        "source": "resume",
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.624,
+    "overall_confidence": 0.676,
     "alternatives": null,
     "raw_notes": "Spoke with Priya on 14 May. Very strong on backend systems design. Mentioned she wants to move into a distributed systems architect role in 12-18 months. Currently notice period 60 days. Salary expectation: 28-32 LPA. Good culture fit."
   },
@@ -520,8 +532,8 @@
     "headline": "Founder",
     "years_experience": 12.0,
     "skills": [
-      "esbuild",
       "javascript",
+      "esbuild",
       "rollup",
       "rust",
       "vite",
@@ -617,13 +629,13 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.702,
+    "overall_confidence": 0.514,
     "alternatives": {
       "bio": [
         {
           "value": "Founder @voidzero-dev, author of @vuejs and @vitejs. Connoisseur of sushi.",
           "source": "github",
-          "trust": 3,
+          "trust": 2,
           "suppressed_reason": "lower_trust"
         }
       ]
@@ -640,66 +652,66 @@
     "location": {
       "city": "San Francisco",
       "region": "CA",
-      "country": "US"
+      "country": null
     },
     "links": {
       "linkedin": null,
       "github": "https://github.com/addyosmani",
-      "portfolio": "https://www.addyosmani.com",
+      "portfolio": "https://addyosmani.com",
       "other": [
-        "https://addyosmani.com"
+        "https://www.addyosmani.com"
       ]
     },
     "headline": "Engineering Lead",
     "years_experience": 16.0,
     "skills": [
-      "chrome-devtools",
-      "css",
-      "javascript",
-      "performance",
-      "web-vitals",
-      "shell",
-      "typescript",
       "chrome devtools",
       "core web vitals",
       "html",
+      "javascript",
       "lighthouse",
       "web performance",
-      "workbox"
+      "workbox",
+      "css",
+      "chrome-devtools",
+      "performance",
+      "web-vitals",
+      "shell",
+      "typescript"
     ],
     "experience": [
       {
         "company": "Google",
-        "title": "Engineering Lead",
+        "title": "Engineering Lead, Chrome",
         "start": "2017-01",
         "end": null,
-        "summary": "Leads Chrome web performance and developer experience initiatives."
+        "summary": "Lead Chrome web performance initiatives including Core Web Vitals and performance tooling. Author of web.dev/vitals standards. Manage a team of 8 engineers."
       },
       {
         "company": "Google",
-        "title": "Senior Staff Engineer",
+        "title": "Senior Staff Software Engineer",
         "start": "2012-06",
         "end": "2017-01",
-        "summary": "Chrome DevTools and web standards work."
+        "summary": "Built and shipped Chrome DevTools features. Authored tooling widely used by frontend developers globally."
       }
     ],
     "education": [
       {
         "institution": "University of Ulster",
-        "degree": "B.Sc.",
-        "field": "Computer Science",
+        "degree": "B.Sc. Multimedia Technology and Design",
+        "field": null,
         "end_year": "2008"
       }
     ],
     "provenance": [
       {
         "field": "full_name",
-        "source": "ats_json",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "ats_json",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -719,12 +731,12 @@
       },
       {
         "field": "location",
-        "source": "ats_json",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
         "field": "links.github",
-        "source": "github",
+        "source": "resume",
         "method": "extract_url"
       },
       {
@@ -734,22 +746,22 @@
       },
       {
         "field": "experience",
-        "source": "ats_json",
+        "source": "resume",
         "method": "take_highest_trust"
       },
       {
         "field": "education",
-        "source": "ats_json",
+        "source": "resume",
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.537,
+    "overall_confidence": 0.595,
     "alternatives": {
       "bio": [
         {
           "value": "Former Director at Google working on Gemini and  Google Cloud",
           "source": "github",
-          "trust": 3,
+          "trust": 2,
           "suppressed_reason": "lower_trust"
         }
       ]
@@ -852,13 +864,13 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.577,
+    "overall_confidence": 0.389,
     "alternatives": {
       "full_name": [
         {
           "value": "TJ",
           "source": "github",
-          "trust": 3,
+          "trust": 2,
           "suppressed_reason": "lower_trust"
         }
       ]
@@ -877,7 +889,7 @@
     "location": {
       "city": "Lehi",
       "region": "UT",
-      "country": "US"
+      "country": null
     },
     "links": {
       "linkedin": null,
@@ -887,18 +899,18 @@
         "https://kentcdodds.com"
       ]
     },
-    "headline": "Educator",
+    "headline": "Educator & Founder",
     "years_experience": 10.0,
     "skills": [
-      "html",
-      "javascript",
-      "typescript",
       "css",
+      "javascript",
       "jest",
       "node",
       "react",
       "remix",
-      "testing-library"
+      "testing-library",
+      "typescript",
+      "html"
     ],
     "experience": [
       {
@@ -927,12 +939,12 @@
     "provenance": [
       {
         "field": "full_name",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -947,17 +959,17 @@
       },
       {
         "field": "emails",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "collect_unique"
       },
       {
         "field": "phones",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_e164"
       },
       {
         "field": "location",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
@@ -981,13 +993,13 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.47,
+    "overall_confidence": 0.522,
     "alternatives": {
       "headline": [
         {
-          "value": "Educator & Founder",
-          "source": "resume",
-          "trust": 2,
+          "value": "Educator",
+          "source": "recruiter_csv",
+          "trust": 3,
           "suppressed_reason": "lower_trust"
         }
       ]
@@ -1006,27 +1018,27 @@
     "location": {
       "city": "San Francisco",
       "region": "CA",
-      "country": "US"
+      "country": null
     },
     "links": {
       "linkedin": null,
       "github": "https://github.com/mojombo",
-      "portfolio": "http://tom.preston-werner.com",
+      "portfolio": "https://tom.preston-werner.com",
       "other": [
-        "https://tom.preston-werner.com"
+        "http://tom.preston-werner.com"
       ]
     },
     "headline": "Co-founder",
     "years_experience": 20.0,
     "skills": [
-      "erlang",
-      "ruby",
       "git",
       "go",
       "javascript",
       "liquid templating",
       "markdown",
-      "ruby on rails"
+      "ruby",
+      "ruby on rails",
+      "erlang"
     ],
     "experience": [
       {
@@ -1062,12 +1074,12 @@
     "provenance": [
       {
         "field": "full_name",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -1077,22 +1089,22 @@
       },
       {
         "field": "emails",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "collect_unique"
       },
       {
         "field": "phones",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_e164"
       },
       {
         "field": "location",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
         "field": "links.github",
-        "source": "github",
+        "source": "resume",
         "method": "extract_url"
       },
       {
@@ -1111,7 +1123,7 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.564,
+    "overall_confidence": 0.627,
     "alternatives": null,
     "raw_notes": null
   },
@@ -1127,7 +1139,7 @@
     "location": {
       "city": "Mountain View",
       "region": "CA",
-      "country": "US"
+      "country": null
     },
     "links": {
       "linkedin": null,
@@ -1140,15 +1152,15 @@
     "headline": "Developer Advocate",
     "years_experience": 15.0,
     "skills": [
-      "shell",
-      "typescript",
-      "javascript",
       "chrome devtools",
       "css",
       "devtools protocol",
       "html",
+      "javascript",
       "lighthouse",
-      "web performance"
+      "web performance",
+      "shell",
+      "typescript"
     ],
     "experience": [
       {
@@ -1177,12 +1189,12 @@
     "provenance": [
       {
         "field": "full_name",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -1197,22 +1209,22 @@
       },
       {
         "field": "emails",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "collect_unique"
       },
       {
         "field": "phones",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_e164"
       },
       {
         "field": "location",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
         "field": "links.github",
-        "source": "github",
+        "source": "resume",
         "method": "extract_url"
       },
       {
@@ -1231,7 +1243,7 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.52,
+    "overall_confidence": 0.572,
     "alternatives": null,
     "raw_notes": "Spoke to Paul on call. Strong DX background, very articulate. Mentioned interest in dev tooling roles. Notes from screening, 2026-05-10."
   },
@@ -1257,7 +1269,7 @@
     "experience": null,
     "education": null,
     "provenance": null,
-    "overall_confidence": 0.2,
+    "overall_confidence": 0.5,
     "alternatives": null,
     "raw_notes": null
   },
@@ -1272,8 +1284,8 @@
     ],
     "location": {
       "city": "Chennai",
-      "region": "Tamil Nadu",
-      "country": "IN"
+      "region": "India",
+      "country": null
     },
     "links": {
       "linkedin": null,
@@ -1284,13 +1296,13 @@
     "headline": "Software Engineer II",
     "years_experience": 5.0,
     "skills": [
+      "docker",
       "graphql",
+      "jest",
       "node",
       "postgres",
       "react",
-      "typescript",
-      "jest",
-      "docker"
+      "typescript"
     ],
     "experience": [
       {
@@ -1298,33 +1310,33 @@
         "title": "Software Engineer II",
         "start": "2021-06",
         "end": null,
-        "summary": "Builds CRM pipeline and contact management features."
+        "summary": "Builds CRM pipeline, contact management, and bulk action features in React.js and Node.js. Led migration of legacy jQuery UI to React, reducing bundle size by 45%."
       },
       {
         "company": "HCL Technologies",
         "title": "Software Engineer",
         "start": "2019-07",
         "end": "2021-05",
-        "summary": "Enterprise Java applications for telecom client."
+        "summary": "Enterprise Java and REST API development for a US telecom client."
       }
     ],
     "education": [
       {
         "institution": "Anna University",
-        "degree": "B.E.",
-        "field": "Computer Science",
+        "degree": "B.E. Computer Science",
+        "field": null,
         "end_year": "2019"
       }
     ],
     "provenance": [
       {
         "field": "full_name",
-        "source": "ats_json",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "ats_json",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -1339,7 +1351,7 @@
       },
       {
         "field": "emails",
-        "source": "ats_json",
+        "source": "resume",
         "method": "collect_unique"
       },
       {
@@ -1349,7 +1361,7 @@
       },
       {
         "field": "location",
-        "source": "ats_json",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
@@ -1359,12 +1371,12 @@
       },
       {
         "field": "experience",
-        "source": "ats_json",
+        "source": "resume",
         "method": "take_highest_trust"
       },
       {
         "field": "education",
-        "source": "ats_json",
+        "source": "resume",
         "method": "take_highest_trust"
       }
     ],
@@ -1374,7 +1386,7 @@
         {
           "value": "Software Engineer",
           "source": "recruiter_csv",
-          "trust": 4,
+          "trust": 3,
           "suppressed_reason": "lower_trust"
         }
       ]
@@ -1390,8 +1402,8 @@
     ],
     "location": {
       "city": "Delhi",
-      "region": "DL",
-      "country": "IN"
+      "region": "India",
+      "country": null
     },
     "links": {
       "linkedin": null,
@@ -1437,12 +1449,12 @@
     "provenance": [
       {
         "field": "full_name",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -1452,12 +1464,12 @@
       },
       {
         "field": "phones",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_e164"
       },
       {
         "field": "location",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
@@ -1476,7 +1488,7 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.468,
+    "overall_confidence": 0.624,
     "alternatives": null,
     "raw_notes": null
   },
@@ -1491,8 +1503,8 @@
     ],
     "location": {
       "city": "Bangalore",
-      "region": "Karnataka",
-      "country": "IN"
+      "region": "India",
+      "country": null
     },
     "links": {
       "linkedin": null,
@@ -1503,57 +1515,57 @@
     "headline": "ML Engineer",
     "years_experience": 3.0,
     "skills": [
-      "nlp",
-      "recommendation systems",
-      "python",
-      "pytorch",
-      "sql",
-      "tensorflow",
       "docker",
       "kafka",
       "mlflow",
+      "python",
+      "pytorch",
       "scikit-learn",
-      "spark"
+      "spark",
+      "sql",
+      "tensorflow",
+      "nlp",
+      "recommendation systems"
     ],
     "experience": [
       {
         "company": "Paytm",
-        "title": "Machine Learning Engineer",
+        "title": "ML Engineer",
         "start": "2023-02",
         "end": null,
-        "summary": null
+        "summary": "Builds recommendation and fraud detection models for Paytm's payment platform. Developed real-time feature store reducing model inference latency by 35%."
       },
       {
         "company": "Wipro",
         "title": "Data Scientist",
         "start": "2021-06",
         "end": "2023-01",
-        "summary": null
+        "summary": "Built NLP document classification models for insurance automation clients."
       }
     ],
     "education": [
       {
         "institution": "IISc Bangalore",
-        "degree": "M.Tech",
-        "field": "Artificial Intelligence",
+        "degree": "M.Tech Artificial Intelligence",
+        "field": null,
         "end_year": "2021"
       },
       {
         "institution": "NIT Calicut",
-        "degree": "B.Tech",
-        "field": "Electronics",
+        "degree": "B.Tech Electronics",
+        "field": null,
         "end_year": "2019"
       }
     ],
     "provenance": [
       {
         "field": "full_name",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -1563,17 +1575,17 @@
       },
       {
         "field": "emails",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "collect_unique"
       },
       {
         "field": "phones",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_e164"
       },
       {
         "field": "location",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
@@ -1583,22 +1595,22 @@
       },
       {
         "field": "experience",
-        "source": "linkedin",
+        "source": "resume",
         "method": "take_highest_trust"
       },
       {
         "field": "education",
-        "source": "linkedin",
+        "source": "resume",
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.514,
+    "overall_confidence": 0.577,
     "alternatives": {
       "headline": [
         {
           "value": "Machine Learning Engineer",
           "source": "linkedin",
-          "trust": 3,
+          "trust": 2,
           "suppressed_reason": "lower_trust"
         }
       ]
@@ -1705,13 +1717,13 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.706,
+    "overall_confidence": 0.538,
     "alternatives": {
       "phones": [
         {
           "value": "+919876510013",
           "source": "recruiter_csv",
-          "trust": 4,
+          "trust": 3,
           "suppressed_reason": "in_source_duplicate_older"
         }
       ]
@@ -1725,13 +1737,13 @@
       "arjun.mehta@example.com"
     ],
     "phones": [
-      "+919876510007",
-      "+919876512345"
+      "+919876512345",
+      "+919876510007"
     ],
     "location": {
       "city": "Bangalore",
-      "region": "Karnataka",
-      "country": "IN"
+      "region": "India",
+      "country": null
     },
     "links": {
       "linkedin": null,
@@ -1739,51 +1751,51 @@
       "portfolio": null,
       "other": []
     },
-    "headline": "Senior SDE",
+    "headline": "SDE 2",
     "years_experience": 4.0,
     "skills": [
+      "celery",
+      "kafka",
       "django",
       "docker",
       "postgres",
       "python",
       "redis",
-      "rest",
-      "celery",
-      "kafka"
+      "rest"
     ],
     "experience": [
       {
         "company": "Flipkart",
-        "title": "Senior SDE",
+        "title": "SDE 2",
         "start": "2022-03",
         "end": null,
-        "summary": "Owns order management service handling 500k orders per day."
+        "summary": "Own order management service handling 500k daily orders. Led migration from monolith to microservices. Reduced service error rate from 0.8% to 0.05%."
       },
       {
         "company": "TCS",
         "title": "Software Engineer",
         "start": "2020-07",
         "end": "2022-02",
-        "summary": "Enterprise Java development for retail client."
+        "summary": "Enterprise Java development for a UK retail client. Maintained and extended Spring MVC application serving 5M users."
       }
     ],
     "education": [
       {
         "institution": "BITS Pilani",
-        "degree": "B.E.",
-        "field": "Computer Science",
+        "degree": "B.E. Computer Science",
+        "field": null,
         "end_year": "2020"
       }
     ],
     "provenance": [
       {
         "field": "full_name",
-        "source": "ats_json",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "ats_json",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -1798,17 +1810,17 @@
       },
       {
         "field": "emails",
-        "source": "ats_json",
+        "source": "resume",
         "method": "collect_unique"
       },
       {
         "field": "phones",
-        "source": "ats_json",
+        "source": "resume",
         "method": "normalize_e164"
       },
       {
         "field": "location",
-        "source": "ats_json",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
@@ -1818,32 +1830,32 @@
       },
       {
         "field": "experience",
-        "source": "ats_json",
+        "source": "resume",
         "method": "take_highest_trust"
       },
       {
         "field": "education",
-        "source": "ats_json",
+        "source": "resume",
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.589,
+    "overall_confidence": 0.652,
     "alternatives": {
       "headline": [
         {
-          "value": "SDE 2",
-          "source": "recruiter_csv",
+          "value": "Senior SDE",
+          "source": "ats_json",
           "trust": 4,
           "suppressed_reason": "lower_trust"
         }
       ],
       "phones": [
         {
-          "value": "+919876512345",
-          "source": "resume",
-          "trust": 2,
+          "value": "+919876510007",
+          "source": "ats_json",
+          "trust": 4,
           "suppressed_reason": "conflict_different_number",
-          "note": "primary from ats_json (trust=5)"
+          "note": "primary from resume (trust=5)"
         }
       ]
     },
@@ -1860,8 +1872,8 @@
     ],
     "location": {
       "city": "Hyderabad",
-      "region": "Telangana",
-      "country": "IN"
+      "region": "India",
+      "country": null
     },
     "links": {
       "linkedin": null,
@@ -1869,7 +1881,7 @@
       "portfolio": null,
       "other": []
     },
-    "headline": "SRE",
+    "headline": "Site Reliability Engineer",
     "years_experience": 3.0,
     "skills": [
       "aws",
@@ -1909,12 +1921,12 @@
     "provenance": [
       {
         "field": "full_name",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
         "field": "headline",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "pick_highest_trust"
       },
       {
@@ -1924,17 +1936,17 @@
       },
       {
         "field": "emails",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "collect_unique"
       },
       {
         "field": "phones",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_e164"
       },
       {
         "field": "location",
-        "source": "recruiter_csv",
+        "source": "resume",
         "method": "normalize_location"
       },
       {
@@ -1953,13 +1965,13 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.454,
+    "overall_confidence": 0.622,
     "alternatives": {
       "headline": [
         {
-          "value": "Site Reliability Engineer",
-          "source": "resume",
-          "trust": 2,
+          "value": "SRE",
+          "source": "recruiter_csv",
+          "trust": 3,
           "suppressed_reason": "lower_trust"
         }
       ]
@@ -2072,7 +2084,7 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.756,
+    "overall_confidence": 0.588,
     "alternatives": null,
     "raw_notes": null
   },
@@ -2181,7 +2193,7 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.756,
+    "overall_confidence": 0.588,
     "alternatives": null,
     "raw_notes": null
   },
@@ -2290,7 +2302,7 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.756,
+    "overall_confidence": 0.588,
     "alternatives": null,
     "raw_notes": null
   }
