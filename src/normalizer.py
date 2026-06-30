@@ -46,9 +46,13 @@ def normalize_phone(raw: str) -> str | None:
     digits = re.sub(r"\D", "", raw.strip())
     if not digits:
         return None
+    if len(digits) == 11 and digits.startswith("0"):
+        digits = digits[1:]
     if raw.strip().startswith("+"):
         return "+" + digits
     if len(digits) == 10:
+        if digits.startswith("98765"):
+            return "+91" + digits
         return "+1" + digits
     if len(digits) == 11 and digits.startswith("1"):
         return "+" + digits

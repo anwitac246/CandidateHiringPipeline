@@ -229,11 +229,7 @@ def _dedup_within_source(records: list[dict]) -> list[dict]:
                 winner = group[0]
                 winner.setdefault("_suppressed_in_source", [])
                 for loser in group[1:]:
-                    winner["_suppressed_in_source"].append({
-                        "source": source,
-                        "last_updated": loser.get("last_updated"),
-                        "phone": loser.get("phone"),
-                    })
+                    winner["_suppressed_in_source"].append(loser)
                 result.append(winner)
         result.extend(no_email)
     return result
@@ -262,25 +258,36 @@ def _pick_scalar(
 
     for r in sorted_recs:
         val = r.get(field)
-        if val is None:
-            continue
-        trust = TRUST_RANK.get(r.get("source", ""), 0)
-        src = r.get("source", "unknown")
+        if val is not None:
+            trust = TRUST_RANK.get(r.get("source", ""), 0)
+            src = r.get("source", "unknown")
 
-        if winner_value is None:
-            winner_value = val
-            winner_source = src
-            winner_trust = trust
-            provenance.append(ProvenanceEntry(
-                field=prov_label, source=src, method="pick_highest_trust"
-            ))
-        elif val != winner_value:
-            alternatives.setdefault(prov_label, []).append({
-                "value": val,
-                "source": src,
-                "trust": trust,
-                "suppressed_reason": "lower_trust" if trust < winner_trust else "lower_recency",
-            })
+            if winner_value is None:
+                winner_value = val
+                winner_source = src
+                winner_trust = trust
+                provenance.append(ProvenanceEntry(
+                    field=prov_label, source=src, method="pick_highest_trust"
+                ))
+            elif val != winner_value:
+                alternatives.setdefault(prov_label, []).append({
+                    "value": val,
+                    "source": src,
+                    "trust": trust,
+                    "suppressed_reason": "lower_trust" if trust < winner_trust else "lower_recency",
+                })
+
+        for suppressed in r.get("_suppressed_in_source", []):
+            s_val = suppressed.get(field)
+            if s_val is not None and s_val != winner_value:
+                s_src = suppressed.get("source", "unknown")
+                s_trust = TRUST_RANK.get(s_src, 0)
+                alternatives.setdefault(prov_label, []).append({
+                    "value": s_val,
+                    "source": s_src,
+                    "trust": s_trust,
+                    "suppressed_reason": "in_source_duplicate_older",
+                })
 
     return winner_value
 
@@ -290,23 +297,31 @@ def _pick_title(
     provenance: list[ProvenanceEntry],
     alternatives: dict[str, list],
 ) -> str | None:
-    candidates: list[tuple[int, str, str]] = []
+    candidates: list[tuple[int, str, str, str | None]] = []
     for r in sorted_recs:
         src = r.get("source", "")
         trust = TRUST_RANK.get(src, 0)
         title = r.get("title") or r.get("headline")
         if title:
-            candidates.append((trust, title, src))
+            candidates.append((trust, title, src, r.get("last_updated")))
+        for suppressed in r.get("_suppressed_in_source", []):
+            s_title = suppressed.get("title") or suppressed.get("headline")
+            if s_title:
+                s_src = suppressed.get("source", "")
+                s_trust = TRUST_RANK.get(s_src, 0)
+                candidates.append((s_trust, s_title, s_src, suppressed.get("last_updated")))
 
     if not candidates:
         return None
 
-    candidates.sort(key=lambda x: x[0], reverse=True)
-    winner_trust, winner_title, winner_src = candidates[0]
+    candidates.sort(key=lambda x: (x[0], x[3] or ""), reverse=True)
+    winner_trust, winner_title, winner_src, winner_date = candidates[0]
     provenance.append(ProvenanceEntry(field="headline", source=winner_src, method="pick_highest_trust"))
 
-    for trust, title, src in candidates[1:]:
-        if title != winner_title:
+    seen_titles = {winner_title}
+    for trust, title, src, date in candidates[1:]:
+        if title not in seen_titles:
+            seen_titles.add(title)
             alternatives.setdefault("headline", []).append({
                 "value": title,
                 "source": src,
@@ -343,31 +358,45 @@ def _collect_phones(
     alternatives: dict[str, list],
 ) -> list[str]:
     seen: list[str] = []
+    seen_alts = set()
     first_source: str | None = None
 
     for r in sorted_recs:
         raw = r.get("phone") or ""
         normalized = normalize_phone(raw)
-        if not normalized:
-            continue
-        src = r.get("source", "unknown")
-        if normalized not in seen:
-            if not seen:
-                first_source = src
-                provenance.append(ProvenanceEntry(
-                    field="phones", source=src, method="normalize_e164"
-                ))
-            else:
-                trust = TRUST_RANK.get(src, 0)
-                first_trust = TRUST_RANK.get(first_source or "", 0)
+        if normalized:
+            src = r.get("source", "unknown")
+            if normalized not in seen:
+                if not seen:
+                    first_source = src
+                    provenance.append(ProvenanceEntry(
+                        field="phones", source=src, method="normalize_e164"
+                    ))
+                else:
+                    trust = TRUST_RANK.get(src, 0)
+                    first_trust = TRUST_RANK.get(first_source or "", 0)
+                    alternatives.setdefault("phones", []).append({
+                        "value": normalized,
+                        "source": src,
+                        "trust": trust,
+                        "suppressed_reason": "conflict_different_number",
+                        "note": f"primary from {first_source} (trust={first_trust})",
+                    })
+                seen.append(normalized)
+
+        for suppressed in r.get("_suppressed_in_source", []):
+            s_raw = suppressed.get("phone") or ""
+            s_normalized = normalize_phone(s_raw)
+            if s_normalized and s_normalized not in seen and s_normalized not in seen_alts:
+                s_src = suppressed.get("source", "unknown")
+                s_trust = TRUST_RANK.get(s_src, 0)
                 alternatives.setdefault("phones", []).append({
-                    "value": normalized,
-                    "source": src,
-                    "trust": trust,
-                    "suppressed_reason": "conflict_different_number",
-                    "note": f"primary from {first_source} (trust={first_trust})",
+                    "value": s_normalized,
+                    "source": s_src,
+                    "trust": s_trust,
+                    "suppressed_reason": "in_source_duplicate_older",
                 })
-            seen.append(normalized)
+                seen_alts.add(s_normalized)
 
     return seen
 
