@@ -18,6 +18,9 @@ _SECTION_HEADERS = re.compile(
 
 def ingest(resumes_dir: Path) -> list[dict]:
     records = []
+    if not resumes_dir.exists():
+        print(f"[resume_ingestor] warning: resumes directory {resumes_dir} does not exist. Skipping.")
+        return []
     for path in sorted(resumes_dir.glob("*.txt")):
         record = _parse_resume(path)
         if record is not None:

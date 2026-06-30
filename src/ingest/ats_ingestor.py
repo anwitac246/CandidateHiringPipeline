@@ -15,6 +15,9 @@ def ingest(ats_dir: Path) -> list[dict]:
     Malformed JSON is caught, logged, and skipped without crashing.
     """
     records = []
+    if not ats_dir.exists():
+        print(f"[ats_ingestor] warning: ATS directory {ats_dir} does not exist. Skipping.")
+        return []
 
     main_file = ats_dir / "candidates.json"
     if main_file.exists():

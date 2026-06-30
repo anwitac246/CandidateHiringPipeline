@@ -9,6 +9,9 @@ TRUST_SCORE = 0.70
 
 def ingest(github_dir: Path) -> list[dict]:
     records = []
+    if not github_dir.exists():
+        print(f"[github_ingestor] warning: github directory {github_dir} does not exist. Skipping.")
+        return []
     for path in sorted(github_dir.glob("*.json")):
         try:
             raw = json.loads(path.read_text(encoding="utf-8"))

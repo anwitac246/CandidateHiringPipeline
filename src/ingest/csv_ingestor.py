@@ -15,6 +15,9 @@ def ingest(csv_path: Path) -> list[dict]:
     downstream code never has to distinguish '' from None.
     """
     records = []
+    if not csv_path.exists():
+        print(f"[csv_ingestor] warning: CSV path {csv_path} does not exist. Skipping.")
+        return []
     with open(csv_path, newline="", encoding="utf-8") as f:
         for row in csv.DictReader(f):
             records.append({

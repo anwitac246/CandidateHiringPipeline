@@ -8,6 +8,9 @@ TRUST_SCORE = 0.50
 
 def ingest(notes_dir: Path) -> list[dict]:
     records = []
+    if not notes_dir.exists():
+        print(f"[notes_ingestor] warning: recruiter notes directory {notes_dir} does not exist. Skipping.")
+        return []
     for path in sorted(notes_dir.glob("*.txt")):
         try:
             text = path.read_text(encoding="utf-8").strip()
