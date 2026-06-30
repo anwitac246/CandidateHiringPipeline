@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Candidate Data Transformer — Pipeline Walkthrough</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-base: #0b0f19;
+            --bg-surface: #111827;
+            --bg-card: #1f2937;
+            --border-color: #374151;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent-green: #10b981;
+            --accent-yellow: #f59e0b;
+            --accent-red: #ef4444;
+            --accent-blue: #06b6d4;
+            --font-main: 'Inter', sans-serif;
+            --font-title: 'Outfit', sans-serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-base);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        header {
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            padding: 14px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 10;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-area h1 {
+            font-family: var(--font-title);
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #ffffff;
+        }
+
+        .logo-area span {
+            background: linear-gradient(135deg, #6366f1, #a855f7);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 6px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .app-container {
+            display: flex;
+            flex: 1;
+            overflow: hidden;
+        }
+
+        /* Sidebar: Candidate List */
+        .sidebar {
+            width: 300px;
+            background-color: var(--bg-surface);
+            border-right: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .sidebar-header {
+            padding: 16px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 10px 14px;
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            font-size: 13px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-box:focus {
+            border-color: var(--primary);
+        }
+
+        .candidate-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px;
+        }
+
+        .candidate-item {
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-bottom: 6px;
+            transition: background-color 0.2s, border-color 0.2s;
+            border: 1px solid transparent;
+        }
+
+        .candidate-item:hover {
+            background-color: rgba(31, 41, 55, 0.5);
+        }
+
+        .candidate-item.active {
+            background-color: rgba(99, 102, 241, 0.12);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        .candidate-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 4px;
+        }
+
+        .candidate-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: #ffffff;
+        }
+
+        .candidate-id {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            background-color: var(--bg-base);
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+        .candidate-headline {
+            font-size: 12px;
+            color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            margin-bottom: 6px;
+        }
+
+        .candidate-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .confidence-badge {
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .conflict-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-yellow);
+            display: inline-block;
+        }
+
+        /* Center Dashboard Workspace */
+        .workspace {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background-color: var(--bg-base);
+        }
+
+        /* Pipeline Stepper Navigation */
+        .stepper-nav {
+            display: flex;
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            padding: 16px 24px;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .stepper-steps {
+            display: flex;
+            gap: 16px;
+            flex: 1;
+            justify-content: space-between;
+            margin-right: 24px;
+        }
+
+        .step-node {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 6px;
+            transition: background-color 0.2s;
+        }
+
+        .step-node:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+        .step-number {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: var(--bg-card);
+            border: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            transition: all 0.2s;
+        }
+
+        .step-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-muted);
+            transition: color 0.2s;
+        }
+
+        .step-node.active .step-number {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+            box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+        }
+
+        .step-node.active .step-label {
+            color: #ffffff;
+        }
+
+        .step-node.completed .step-number {
+            background-color: transparent;
+            border-color: var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .step-node.completed .step-label {
+            color: var(--text-main);
+        }
+
+        /* Stepper action buttons */
+        .stepper-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover:not(:disabled) {
+            background-color: var(--border-color);
+            border-color: var(--text-muted);
+        }
+
+        .btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            border-color: var(--primary);
+            color: #ffffff;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--primary-hover);
+            border-color: var(--primary-hover);
+        }
+
+        /* Workspace Contents */
+        .workspace-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+        }
+
+        .step-pane {
+            display: none;
+            height: 100%;
+        }
+
+        .step-pane.active {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        /* Two Column Layout inside Panes */
+        .pane-split {
+            display: flex;
+            gap: 20px;
+            flex: 1;
+            min-height: 0;
+        }
+
+        .pane-col {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            min-height: 0;
+            overflow-y: auto;
+        }
+
+        /* Styling for Cards */
+        .card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-header-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            padding-bottom: 8px;
+        }
+
+        .card-title {
+            font-family: var(--font-title);
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: var(--primary);
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Code Viewer and Editor styles */
+        .code-box {
+            background-color: var(--bg-base);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 12px;
+            overflow: auto;
+            color: #38bdf8;
+            white-space: pre-wrap;
+            max-height: 250px;
+            flex: 1;
+        }
+
+        .code-box.large {
+            max-height: none;
+        }
+
+        .editor-textarea {
+            width: 100%;
+            background-color: var(--bg-base);
+            color: #e2e8f0;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: monospace;
+            font-size: 12px;
+            resize: none;
+            outline: none;
+            flex: 1;
+        }
+
+        .editor-textarea:focus {
+            border-color: var(--primary);
+        }
+
+        /* Comparison Table styles (Step 2) */
+        .diff-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .diff-table th {
+            text-align: left;
+            padding: 10px;
+            border-bottom: 2px solid var(--border-color);
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .diff-table td {
+            padding: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            vertical-align: top;
+        }
+
+        .diff-change {
+            background-color: rgba(16, 185, 129, 0.12);
+            color: var(--accent-green);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .diff-source {
+            font-size: 10px;
+            background-color: var(--bg-card);
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: var(--text-muted);
+        }
+
+        /* UI elements for Merger details (Step 3) */
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .timeline-item {
+            border-left: 2px solid var(--border-color);
+            padding-left: 12px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--primary);
+            position: absolute;
+            left: -4px;
+            top: 6px;
+        }
+
+        .timeline-title {
+            font-weight: 600;
+            color: #ffffff;
+            font-size: 13px;
+        }
+
+        .timeline-subtitle {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+
+        .alternatives-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .alt-record {
+            background-color: rgba(245, 158, 11, 0.05);
+            border-left: 3px solid var(--accent-yellow);
+            padding: 8px 12px;
+            border-radius: 0 6px 6px 0;
+            font-size: 11.5px;
+        }
+
+        .alt-field {
+            font-weight: 600;
+            color: var(--accent-yellow);
+            margin-bottom: 2px;
+        }
+
+        /* Custom Status Indicator for Step 5 */
+        .status-banner {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+
+        .status-banner.success {
+            background-color: rgba(16, 185, 129, 0.1);
+            border: 1px solid var(--accent-green);
+            color: var(--accent-green);
+        }
+
+        .status-banner.error {
+            background-color: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--accent-red);
+            color: var(--accent-red);
+        }
+
+        .status-title {
+            font-family: var(--font-title);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .preset-select-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin-right: 8px;
+        }
+
+        .preset-select {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 6px 12px;
+            border-radius: 6px;
+            outline: none;
+            font-size: 12px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-area">
+            <h1>Candidate Data Transformer</h1>
+            <span>Pipeline Walkthrough</span>
+        </div>
+        <div>
+            <label class="preset-select-label">Select Projection Preset:</label>
+            <select class="preset-select" id="preset-selector" onchange="changePreset()">
+                <option value="default">Default Canonical Schema</option>
+                <option value="custom">Remapped Dynamic Fields</option>
+                <option value="minimal">Minimal Contact Config</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="app-container">
+        <!-- Sidebar Candidate Selector -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <input type="text" class="search-box" id="search-input" placeholder="Search candidates...">
+            </div>
+            <div class="candidate-list" id="candidates-container">
+                <!-- Javascript populated -->
+            </div>
+        </div>
+
+        <!-- Main Workspace Area -->
+        <div class="workspace">
+            <!-- Stepper Header Navigation -->
+            <div class="stepper-nav">
+                <div class="stepper-steps">
+                    <div class="step-node active" id="node-1" onclick="goToStep(1)">
+                        <div class="step-number">1</div>
+                        <div class="step-label">Raw Ingestion</div>
+                    </div>
+                    <div class="step-node" id="node-2" onclick="goToStep(2)">
+                        <div class="step-number">2</div>
+                        <div class="step-label">Normalization</div>
+                    </div>
+                    <div class="step-node" id="node-3" onclick="goToStep(3)">
+                        <div class="step-number">3</div>
+                        <div class="step-label">Merger & Overrides</div>
+                    </div>
+                    <div class="step-node" id="node-4" onclick="goToStep(4)">
+                        <div class="step-number">4</div>
+                        <div class="step-label">Config Projection</div>
+                    </div>
+                    <div class="step-node" id="node-5" onclick="goToStep(5)">
+                        <div class="step-number">5</div>
+                        <div class="step-label">Final Validation</div>
+                    </div>
+                </div>
+                <div class="stepper-actions">
+                    <button class="btn" id="btn-prev" onclick="prevStep()" disabled>Back</button>
+                    <button class="btn btn-primary" id="btn-next" onclick="nextStep()">Next Step</button>
+                </div>
+            </div>
+
+            <!-- Stepper content panes -->
+            <div class="workspace-content">
+                
+                <!-- STEP 1: RAW INGESTION -->
+                <div class="step-pane active" id="pane-1">
+                    <p style="font-size: 13px; color: var(--text-muted);">
+                        <b>Stage 1: Raw Data Ingestion.</b> Below is the raw data captured directly from all sources mapped to this candidate.
+                        Note that some fields may contain conflicting, unstructured, or missing properties.
+                    </p>
+                    <div class="pane-split">
+                        <div class="pane-col">
+                            <div class="card" id="raw-card-1">
+                                <div class="card-header-bar">
+                                    <span class="card-title" id="raw-title-1">Source 1</span>
+                                    <span class="diff-source" id="raw-meta-1">CSV</span>
+                                </div>
+                                <div class="code-box" id="raw-content-1">Select a candidate to begin.</div>
+                            </div>
+                            <div class="card" id="raw-card-2">
+                                <div class="card-header-bar">
+                                    <span class="card-title" id="raw-title-2">Source 2</span>
+                                    <span class="diff-source" id="raw-meta-2">Resume</span>
+                                </div>
+                                <div class="code-box" id="raw-content-2">Select a candidate to begin.</div>
+                            </div>
+                        </div>
+                        <div class="pane-col">
+                            <div class="card" id="raw-card-3">
+                                <div class="card-header-bar">
+                                    <span class="card-title" id="raw-title-3">Source 3</span>
+                                    <span class="diff-source" id="raw-meta-3">GitHub</span>
+                                </div>
+                                <div class="code-box" id="raw-content-3">Select a candidate to begin.</div>
+                            </div>
+                            <div class="card" id="raw-card-4">
+                                <div class="card-header-bar">
+                                    <span class="card-title" id="raw-title-4">Source 4</span>
+                                    <span class="diff-source" id="raw-meta-4">LinkedIn</span>
+                                </div>
+                                <div class="code-box" id="raw-content-4">Select a candidate to begin.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 2: NORMALIZATION -->
+                <div class="step-pane" id="pane-2">
+                    <p style="font-size: 13px; color: var(--text-muted);">
+                        <b>Stage 2: Formatting & Value Normalization.</b> Raw records are parsed through sanitizers. Dates are normalized to <code>YYYY-MM</code>,
+                        phones to E.164, and skill strings are canonicalized (ReactJS -> react). Normalized values are highlighted in green.
+                    </p>
+                    <div class="card" style="flex: 1;">
+                        <div class="card-header-bar">
+                            <span class="card-title">Normalization Comparison Log</span>
+                        </div>
+                        <div style="flex: 1; overflow-y: auto;">
+                            <table class="diff-table">
+                                <thead>
+                                    <tr>
+                                        <th>Field Name</th>
+                                        <th>Raw Value</th>
+                                        <th>Normalized Output</th>
+                                        <th>Source File</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="normalization-tbody">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 3: MERGER & OVERRIDES -->
+                <div class="step-pane" id="pane-3">
+                    <p style="font-size: 13px; color: var(--text-muted);">
+                        <b>Stage 3: De-duplication and Trust Merging.</b> Cleaned records are merged into a single canonical candidate profile.
+                        Conflicting values are resolved based on the trust hierarchy. Suppressed values are logged as alternatives.
+                    </p>
+                    <div class="pane-split">
+                        <!-- Canonical Profile Card -->
+                        <div class="pane-col">
+                            <div class="card" style="flex: 1;">
+                                <div class="card-header-bar">
+                                    <span class="card-title">Merged Canonical Profile</span>
+                                    <span class="diff-source" style="background-color: var(--primary); color: #fff;" id="canonical-confidence">Confidence: 0.00</span>
+                                </div>
+                                <div id="canonical-details" style="font-size: 13px; line-height: 1.5;">
+                                    <!-- Javascript Populated -->
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Overrides log -->
+                        <div class="pane-col">
+                            <div class="card" style="flex: 1;">
+                                <div class="card-header-bar">
+                                    <span class="card-title">Conflict Override Logs</span>
+                                </div>
+                                <div class="alternatives-container" id="alternatives-tbody" style="flex: 1; overflow-y: auto;">
+                                    <!-- JavaScript Populated -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 4: CONFIG PROJECTION -->
+                <div class="step-pane" id="pane-4">
+                    <p style="font-size: 13px; color: var(--text-muted);">
+                        <b>Stage 4: Custom Output Projection.</b> Evaluates configuration paths, remapping source structures (e.g. <code>emails[0]</code> to <code>primary_email</code>),
+                        and filtering fields without modifying underlying candidate transformer logic.
+                    </p>
+                    <div class="pane-split">
+                        <!-- Config Editor -->
+                        <div class="pane-col">
+                            <div class="card" style="flex: 1;">
+                                <div class="card-header-bar">
+                                    <span class="card-title">Runtime Configuration</span>
+                                </div>
+                                <textarea class="editor-textarea" id="config-text" autocomplete="off" spellcheck="false" oninput="runProjection()"></textarea>
+                            </div>
+                        </div>
+                        <!-- Projected output preview -->
+                        <div class="pane-col">
+                            <div class="card" style="flex: 1;">
+                                <div class="card-header-bar">
+                                    <span class="card-title">Projected Profile Preview</span>
+                                </div>
+                                <div class="code-box large" id="projected-preview">JSON Output</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- STEP 5: FINAL VALIDATION -->
+                <div class="step-pane" id="pane-5">
+                    <p style="font-size: 13px; color: var(--text-muted);">
+                        <b>Stage 5: Schema Validation & Output Emission.</b> Validates the projected values against config-defined types (string, string[], number, etc.)
+                        and flags required missing properties.
+                    </p>
+                    <div class="card" style="flex: 1;">
+                        <div id="validation-banner" class="status-banner success">
+                            <div>
+                                <div class="status-title" id="validation-title">Schema Validation Successful</div>
+                                <div style="font-size: 12px; margin-top: 4px;" id="validation-desc">Projected candidate matches the schema defined in runtime configuration.</div>
+                            </div>
+                        </div>
+                        <div class="card-header-bar" style="margin-top: 12px;">
+                            <span class="card-title">Emitted Pipeline Output</span>
+                        </div>
+                        <div class="code-box large" id="emitted-output" style="color: #10b981;">JSON Output</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let candidatesSteps = [];
+        let currentCandidateIndex = 0;
+        let currentStep = 1;
+
+        const CONFIG_PRESETS = {
+            default: {
+                fields: [
+                    {path: "candidate_id", type: "string", required: true},
+                    {path: "full_name", type: "string", required: true},
+                    {path: "emails", type: "string[]"},
+                    {path: "phones", type: "string[]"},
+                    {path: "location", type: "object"},
+                    {path: "links", type: "object"},
+                    {path: "headline", type: "string"},
+                    {path: "years_experience", type: "number"},
+                    {path: "skills", from: "skills[].name", type: "string[]"},
+                    {path: "experience", type: "object[]"},
+                    {path: "education", type: "object[]"},
+                    {path: "provenance", type: "object[]"},
+                    {path: "overall_confidence", type: "number"}
+                ],
+                include_confidence: true,
+                include_provenance: true,
+                on_missing: "null"
+            },
+            custom: {
+                fields: [
+                    {path: "candidate_id", type: "string", required: true},
+                    {path: "full_name", type: "string", required: true},
+                    {path: "primary_email", from: "emails[0]", type: "string", required: true},
+                    {path: "phone", from: "phones[0]", type: "string", normalize: "E164"},
+                    {path: "skills", from: "skills[].name", type: "string[]", normalize: "canonical"}
+                ],
+                include_confidence: true,
+                include_provenance: false,
+                on_missing: "null"
+            },
+            minimal: {
+                fields: [
+                    {path: "candidate_id", type: "string", required: true},
+                    {path: "full_name", type: "string", required: true},
+                    {path: "primary_email", from: "emails[0]", type: "string"}
+                ],
+                include_confidence: false,
+                include_provenance: false,
+                on_missing: "omit"
+            }
+        };
+
+        // Load Preset into editor
+        document.getElementById('config-text').value = JSON.stringify(CONFIG_PRESETS.default, null, 2);
+
+        // Fetch Pipeline step data from API
+        async function fetchPipelineSteps() {
+            let config;
+            try {
+                config = JSON.parse(document.getElementById('config-text').value);
+            } catch (e) {
+                // Keep preset fallback if editor contains invalid JSON temporarily
+                config = CONFIG_PRESETS.default;
+            }
+
+            try {
+                const response = await fetch('/api/pipeline-steps', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(config)
+                });
+                candidatesSteps = await response.json();
+                renderSidebarList();
+                updateActivePane();
+            } catch (err) {
+                console.error("Error fetching pipeline steps:", err);
+            }
+        }
+
+        // Change Preset Dropdown
+        function changePreset() {
+            const presetKey = document.getElementById('preset-selector').value;
+            document.getElementById('config-text').value = JSON.stringify(CONFIG_PRESETS[presetKey], null, 2);
+            fetchPipelineSteps();
+        }
+
+        // On Editor input change
+        function runProjection() {
+            fetchPipelineSteps();
+        }
+
+        // Stepper Navigation
+        function goToStep(stepNum) {
+            currentStep = stepNum;
+            updateStepIndicators();
+            updateActivePane();
+        }
+
+        function nextStep() {
+            if (currentStep < 5) {
+                currentStep++;
+                updateStepIndicators();
+                updateActivePane();
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 1) {
+                currentStep--;
+                updateStepIndicators();
+                updateActivePane();
+            }
+        }
+
+        function updateStepIndicators() {
+            document.querySelectorAll('.step-node').forEach(node => node.classList.remove('active'));
+            document.getElementById(`node-${currentStep}`).classList.add('active');
+
+            // Set completed steps
+            for (let i = 1; i <= 5; i++) {
+                const node = document.getElementById(`node-${i}`);
+                if (i < currentStep) {
+                    node.classList.add('completed');
+                } else {
+                    node.classList.remove('completed');
+                }
+            }
+
+            // Disable buttons
+            document.getElementById('btn-prev').disabled = currentStep === 1;
+            
+            const nextBtn = document.getElementById('btn-next');
+            if (currentStep === 5) {
+                nextBtn.textContent = 'Finish Walkthrough';
+                nextBtn.disabled = true;
+            } else {
+                nextBtn.textContent = 'Next Step';
+                nextBtn.disabled = false;
+            }
+        }
+
+        function updateActivePane() {
+            document.querySelectorAll('.step-pane').forEach(pane => pane.classList.remove('active'));
+            document.getElementById(`pane-${currentStep}`).classList.add('active');
+
+            // Render current candidate walkthrough step data
+            renderStepData();
+        }
+
+        // Sidebar rendering
+        function renderSidebarList() {
+            const container = document.getElementById('candidates-container');
+            const searchVal = document.getElementById('search-input').value.toLowerCase();
+            container.innerHTML = '';
+
+            candidatesSteps.forEach((c, index) => {
+                if (!c.full_name.toLowerCase().includes(searchVal) && !c.candidate_id.toLowerCase().includes(searchVal)) {
+                    return;
+                }
+
+                const item = document.createElement('div');
+                item.className = `candidate-item ${index === currentCandidateIndex ? 'active' : ''}`;
+                item.onclick = () => {
+                    currentCandidateIndex = index;
+                    document.querySelectorAll('.candidate-item').forEach(el => el.classList.remove('active'));
+                    item.classList.add('active');
+                    renderStepData();
+                };
+
+                const confScore = (c.overall_confidence * 100).toFixed(0) + '%';
+
+                item.innerHTML = `
+                    <div class="candidate-item-header">
+                        <span class="candidate-name">${c.full_name}</span>
+                        <span class="candidate-id">${c.candidate_id}</span>
+                    </div>
+                    <div class="candidate-headline">${c.headline}</div>
+                    <div class="candidate-meta">
+                        <span class="confidence-badge" style="color: ${c.overall_confidence > 0.8 ? 'var(--accent-green)' : 'var(--accent-yellow)'}">
+                            Confidence: ${confScore}
+                        </span>
+                        ${c.has_conflicts ? '<span class="conflict-dot" title="Has overridden conflicts"></span>' : ''}
+                    </div>
+                `;
+                container.appendChild(item);
+            });
+        }
+
+        // Step Walkthrough Data Rendering
+        function renderStepData() {
+            const data = candidatesSteps[currentCandidateIndex];
+            if (!data) return;
+
+            // STEP 1: RAW INGESTION DATA
+            if (currentStep === 1) {
+                // Clear out cards
+                for (let i = 1; i <= 4; i++) {
+                    document.getElementById(`raw-card-${i}`).style.display = 'none';
+                }
+
+                const sources = data.raw_records || [];
+                sources.forEach((src, idx) => {
+                    const cardNum = idx + 1;
+                    if (cardNum > 4) return; // limit to 4 panels in UI grid
+
+                    const card = document.getElementById(`raw-card-${cardNum}`);
+                    const title = document.getElementById(`raw-title-${cardNum}`);
+                    const meta = document.getElementById(`raw-meta-${cardNum}`);
+                    const content = document.getElementById(`raw-content-${cardNum}`);
+
+                    card.style.display = 'flex';
+                    title.textContent = `Source Record ${cardNum}`;
+                    
+                    const srcName = src.source || "unknown";
+                    meta.textContent = srcName.toUpperCase();
+
+                    // Format code preview cleanly
+                    if (srcName === 'resume' && src.raw_text) {
+                        content.textContent = src.raw_text;
+                    } else if (srcName === 'recruiter_notes' && src.raw_notes) {
+                        content.textContent = src.raw_notes;
+                    } else {
+                        // structured JSON
+                        const displayCopy = {...src};
+                        delete displayCopy.source;
+                        delete displayCopy.trust_score;
+                        content.textContent = JSON.stringify(displayCopy, null, 2);
+                    }
+                });
+            }
+
+            // STEP 2: NORMALIZATION LOGS
+            if (currentStep === 2) {
+                const tbody = document.getElementById('normalization-tbody');
+                tbody.innerHTML = '';
+
+                const rawList = data.raw_records || [];
+                const normList = data.normalized_records || [];
+
+                rawList.forEach((raw, idx) => {
+                    const norm = normList[idx];
+                    const src = raw.source || "unknown";
+
+                    // Phone differences
+                    if (raw.phone) {
+                        const rawPhone = raw.phone;
+                        const normPhone = norm.phone;
+                        const changed = rawPhone !== normPhone;
+                        tbody.innerHTML += `
+                            <tr>
+                                <td><b>Phone</b></td>
+                                <td><code>${rawPhone}</code></td>
+                                <td><span class="${changed ? 'diff-change' : ''}"><code>${normPhone || 'None'}</code></span></td>
+                                <td><span class="diff-source">${src}</span></td>
+                            </tr>
+                        `;
+                    }
+
+                    // Last updated / date differences
+                    if (raw.last_updated) {
+                        const rawDate = raw.last_updated;
+                        const normDate = norm.last_updated;
+                        const changed = rawDate !== normDate;
+                        tbody.innerHTML += `
+                            <tr>
+                                <td><b>Last Updated</b></td>
+                                <td><code>${rawDate}</code></td>
+                                <td><span class="${changed ? 'diff-change' : ''}"><code>${normDate || 'None'}</code></span></td>
+                                <td><span class="diff-source">${src}</span></td>
+                            </tr>
+                        `;
+                    }
+
+                    // Skills changes
+                    if (raw.skills && raw.skills.length > 0) {
+                        const rawSkills = raw.skills.join(', ');
+                        const normSkills = norm.skills.join(', ');
+                        const changed = rawSkills !== normSkills;
+                        tbody.innerHTML += `
+                            <tr>
+                                <td><b>Skills List</b></td>
+                                <td><code>${rawSkills}</code></td>
+                                <td><span class="${changed ? 'diff-change' : ''}"><code>${normSkills}</code></span></td>
+                                <td><span class="diff-source">${src}</span></td>
+                            </tr>
+                        `;
+                    }
+
+                    // Experience dates check
+                    if (raw.experience && Array.isArray(raw.experience)) {
+                        raw.experience.forEach((e_raw, e_idx) => {
+                            const e_norm = norm.experience ? norm.experience[e_idx] : null;
+                            if (e_raw.start && e_norm) {
+                                const rawSpan = `${e_raw.start} — ${e_raw.end || 'Present'}`;
+                                const normSpan = `${e_norm.start} — ${e_norm.end || 'Present'}`;
+                                const changed = rawSpan !== normSpan;
+                                tbody.innerHTML += `
+                                    <tr>
+                                        <td><b>Experience Dates (${e_raw.company || 'Job'})</b></td>
+                                        <td><code>${rawSpan}</code></td>
+                                        <td><span class="${changed ? 'diff-change' : ''}"><code>${normSpan}</code></span></td>
+                                        <td><span class="diff-source">${src}</span></td>
+                                    </tr>
+                                `;
+                            }
+                        });
+                    }
+                });
+
+                if (tbody.innerHTML === '') {
+                    tbody.innerHTML = '<tr><td colspan="4" style="text-align:center; color:var(--text-muted);">No sanitization operations occurred for this candidate.</td></tr>';
+                }
+            }
+
+            // STEP 3: MERGER OVERRIDES & CANONICAL VIEW
+            if (currentStep === 3) {
+                // Canonical details
+                const canonical = data.canonical_record || {};
+                document.getElementById('canonical-confidence').textContent = `Confidence: ${(data.overall_confidence * 100).toFixed(0)}%`;
+                
+                const detailsContainer = document.getElementById('canonical-details');
+                detailsContainer.innerHTML = `
+                    <div style="font-size: 15px; font-weight: 700; color:#fff; margin-bottom: 4px;">${canonical.full_name}</div>
+                    <div style="color:var(--text-muted); font-size:12px; margin-bottom: 12px;">Headline: ${canonical.headline || 'N/A'}</div>
+                    <div style="margin-bottom: 8px;"><b>Emails:</b> ${canonical.emails ? canonical.emails.join(', ') : 'None'}</div>
+                    <div style="margin-bottom: 8px;"><b>Phones:</b> ${canonical.phones ? canonical.phones.join(', ') : 'None'}</div>
+                    <div style="margin-bottom: 8px;"><b>Location:</b> City=${canonical.location.city || 'N/A'}, Region=${canonical.location.region || 'N/A'}, Country=${canonical.location.country || 'N/A'}</div>
+                    
+                    <div class="timeline" style="margin-top: 16px;">
+                        <div style="font-weight:600; color:var(--primary); font-size:12px; text-transform:uppercase;">Experience Block</div>
+                        ${canonical.experience ? canonical.experience.map(e => `
+                            <div class="timeline-item">
+                                <div class="timeline-title">${e.title}</div>
+                                <div class="timeline-subtitle">${e.company} (${e.start} — ${e.end || 'Present'})</div>
+                            </div>
+                        `).join('') : 'None'}
+                    </div>
+
+                    <div class="timeline" style="margin-top: 16px;">
+                        <div style="font-weight:600; color:var(--primary); font-size:12px; text-transform:uppercase;">Skills (Union Confidences)</div>
+                        <div style="display:flex; flex-wrap:wrap; gap:6px; margin-top: 6px;">
+                            ${canonical.skills ? canonical.skills.map(s => `
+                                <span class="diff-source" style="background-color: var(--bg-card); border: 1px solid var(--border-color); color:#fff;">
+                                    ${s.name} (${(s.confidence * 100).toFixed(0)}%)
+                                </span>
+                            `).join('') : 'None'}
+                        </div>
+                    </div>
+                `;
+
+                // Overrides container
+                const altsContainer = document.getElementById('alternatives-tbody');
+                altsContainer.innerHTML = '';
+                let overrideCount = 0;
+
+                const alts = canonical.alternatives || {};
+                Object.keys(alts).forEach(field => {
+                    const list = alts[field] || [];
+                    if (list.length > 0) {
+                        overrideCount++;
+                        let altItemsHTML = '';
+                        list.forEach(alt => {
+                            altItemsHTML += `
+                                <div style="margin-top: 4px; padding-left: 8px; border-left: 2px solid var(--border-color);">
+                                    <div>Suppressed: <b>${JSON.stringify(alt.value)}</b></div>
+                                    <div style="font-size: 10.5px; color: var(--text-muted);">Source: ${alt.source} (trust tier ${alt.trust || 'N/A'})</div>
+                                    <div style="font-size: 10.5px; color: var(--text-muted);">Reason: ${alt.suppressed_reason}</div>
+                                </div>`;
+                        });
+
+                        altsContainer.innerHTML += `
+                            <div class="alt-record">
+                                <div class="alt-field">Field Conflict: '${field}'</div>
+                                ${altItemsHTML}
+                            </div>`;
+                    }
+                });
+
+                if (overrideCount === 0) {
+                    altsContainer.innerHTML = `
+                        <div style="text-align: center; margin-top: 40px; color: var(--accent-green); font-size: 13px;">
+                            No field overrides occurred. All ingest sources agreed on canonical fields.
+                        </div>`;
+                }
+            }
+
+            // STEP 4: PROJECTOR
+            if (currentStep === 4) {
+                const projected = data.projected_record || {};
+                document.getElementById('projected-preview').textContent = JSON.stringify(projected, null, 2);
+            }
+
+            // STEP 5: VALIDATOR
+            if (currentStep === 5) {
+                const status = data.validation_status || "PASSED";
+                const banner = document.getElementById('validation-banner');
+                const title = document.getElementById('validation-title');
+                const desc = document.getElementById('validation-desc');
+
+                if (status === 'PASSED') {
+                    banner.className = 'status-banner success';
+                    title.textContent = 'Schema Validation Passed';
+                    desc.textContent = 'The projected dictionary matches the schema types and required field definitions successfully.';
+                } else {
+                    banner.className = 'status-banner error';
+                    title.textContent = 'Schema Validation Failed';
+                    desc.textContent = status; // show exception error string
+                }
+
+                // Emitted output block
+                document.getElementById('emitted-output').textContent = JSON.stringify(data.projected_record, null, 2);
+            }
+        }
+
+        // Live filtering
+        document.getElementById('search-input').oninput = renderSidebarList;
+
+        // Run initial load
+        fetchPipelineSteps();
+    </script>
+</body>
+</html>
