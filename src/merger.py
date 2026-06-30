@@ -33,7 +33,7 @@ def merge_all(
     results = []
     for key, recs in groups.items():
         try:
-            results.append(_merge_group(key, recs))
+            results.append(_merge_group(key, recs, candidate_index))
         except Exception as exc:
             print(f"[merger] error on group {key!r}: {exc}")
     return sorted(results, key=lambda r: r.candidate_id)
@@ -151,7 +151,7 @@ def _scan_groups_for_name(groups: dict, name: str) -> str | None:
 
 # ── MERGING ───────────────────────────────────────────────────────────────────
 
-def _merge_group(group_key: str, records: list[dict]) -> CandidateRecord:
+def _merge_group(group_key: str, records: list[dict], candidate_index: dict[str, dict]) -> CandidateRecord:
     records = _dedup_within_source(records)
     sorted_recs = _sort_by_trust(records)
 
@@ -173,7 +173,7 @@ def _merge_group(group_key: str, records: list[dict]) -> CandidateRecord:
     experience = _merge_experience(sorted_recs, provenance)
     education = _merge_education(sorted_recs, provenance)
 
-    candidate_id = _assign_id(group_key, sorted_recs)
+    candidate_id = _assign_id(group_key, sorted_recs, candidate_index)
     overall_confidence = _score_confidence(
         sorted_recs, full_name, emails, phones, skills, experience, alternatives
     )
@@ -592,11 +592,40 @@ def _score_confidence(
 
 # ── CANDIDATE ID ──────────────────────────────────────────────────────────────
 
-def _assign_id(group_key: str, sorted_recs: list[dict]) -> str:
+def _assign_id(group_key: str, sorted_recs: list[dict], candidate_index: dict[str, dict]) -> str:
+    # 1. Search candidate_index by matching any record's email or name
+    emails = set()
+    names = set()
+    for r in sorted_recs:
+        e = r.get("email")
+        n = r.get("full_name")
+        if e:
+            emails.add(_norm_email(e))
+        if n:
+            names.add(_norm_name(n))
+
+    for cid, info in candidate_index.items():
+        idx_email = _norm_email(info.get("email") or "")
+        idx_name = _norm_name(info.get("full_name") or "")
+        if idx_email and idx_email in emails:
+            return cid
+        if idx_name and idx_name in names:
+            return cid
+
+    # 2. Fallback to candidate_id_hint in records (like GitHub, Notes or Resumes)
     for r in sorted_recs:
         hint = r.get("candidate_id_hint")
         if hint:
             return hint
+
+    # 3. Fallback to parsing filename stem from source_file (e.g. C14.txt -> C14)
+    for r in sorted_recs:
+        src_file = r.get("source_file") or ""
+        m = re.match(r"^(C\d{2})", src_file)
+        if m:
+            return m.group(1)
+
+    # 4. Final fallback to MD5
     if group_key.startswith("email:"):
         raw = group_key[6:]
         return "C_" + hashlib.md5(raw.encode()).hexdigest()[:6].upper()

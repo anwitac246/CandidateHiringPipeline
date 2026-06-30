@@ -769,6 +769,364 @@
     "raw_notes": null
   },
   {
+    "candidate_id": "C07",
+    "full_name": "Arjun Mehta",
+    "emails": [
+      "arjun.mehta@example.com"
+    ],
+    "phones": [
+      "+919876512345",
+      "+919876510007"
+    ],
+    "location": {
+      "city": "Bangalore",
+      "region": "India",
+      "country": null
+    },
+    "links": {
+      "linkedin": null,
+      "github": null,
+      "portfolio": null,
+      "other": []
+    },
+    "headline": "SDE 2",
+    "years_experience": 4.0,
+    "skills": [
+      "celery",
+      "kafka",
+      "django",
+      "docker",
+      "postgres",
+      "python",
+      "redis",
+      "rest"
+    ],
+    "experience": [
+      {
+        "company": "Flipkart",
+        "title": "SDE 2",
+        "start": "2022-03",
+        "end": null,
+        "summary": "Own order management service handling 500k daily orders. Led migration from monolith to microservices. Reduced service error rate from 0.8% to 0.05%."
+      },
+      {
+        "company": "TCS",
+        "title": "Software Engineer",
+        "start": "2020-07",
+        "end": "2022-02",
+        "summary": "Enterprise Java development for a UK retail client. Maintained and extended Spring MVC application serving 5M users."
+      }
+    ],
+    "education": [
+      {
+        "institution": "BITS Pilani",
+        "degree": "B.E. Computer Science",
+        "field": null,
+        "end_year": "2020"
+      }
+    ],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "resume",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "headline",
+        "source": "resume",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "years_experience",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "bio",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "emails",
+        "source": "resume",
+        "method": "collect_unique"
+      },
+      {
+        "field": "phones",
+        "source": "resume",
+        "method": "normalize_e164"
+      },
+      {
+        "field": "location",
+        "source": "resume",
+        "method": "normalize_location"
+      },
+      {
+        "field": "skills",
+        "source": "all_sources",
+        "method": "union_normalized"
+      },
+      {
+        "field": "experience",
+        "source": "resume",
+        "method": "take_highest_trust"
+      },
+      {
+        "field": "education",
+        "source": "resume",
+        "method": "take_highest_trust"
+      }
+    ],
+    "overall_confidence": 0.652,
+    "alternatives": {
+      "headline": [
+        {
+          "value": "Senior SDE",
+          "source": "ats_json",
+          "trust": 4,
+          "suppressed_reason": "lower_trust"
+        }
+      ],
+      "phones": [
+        {
+          "value": "+919876510007",
+          "source": "ats_json",
+          "trust": 4,
+          "suppressed_reason": "conflict_different_number",
+          "note": "primary from resume (trust=5)"
+        }
+      ]
+    },
+    "raw_notes": null
+  },
+  {
+    "candidate_id": "C08",
+    "full_name": "Sara Khan",
+    "emails": [
+      "sara.khan@example.com"
+    ],
+    "phones": [
+      "+919876510008"
+    ],
+    "location": {
+      "city": "Mumbai",
+      "region": "Maharashtra",
+      "country": "IN"
+    },
+    "links": {
+      "linkedin": null,
+      "github": null,
+      "portfolio": null,
+      "other": []
+    },
+    "headline": "Data Engineer",
+    "years_experience": 5.0,
+    "skills": [
+      "airflow",
+      "dbt",
+      "kafka",
+      "python",
+      "spark",
+      "sql"
+    ],
+    "experience": [
+      {
+        "company": "Zomato",
+        "title": "Data Engineer",
+        "start": "2022-01",
+        "end": null,
+        "summary": "Builds and maintains real-time data pipelines for restaurant analytics."
+      },
+      {
+        "company": "Accenture",
+        "title": "Data Analyst",
+        "start": "2020-06",
+        "end": "2021-12",
+        "summary": "BI reporting and ETL pipeline work for FMCG clients."
+      }
+    ],
+    "education": [
+      {
+        "institution": "Symbiosis Institute of Technology",
+        "degree": "B.Tech",
+        "field": "Information Technology",
+        "end_year": "2020"
+      }
+    ],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "headline",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "years_experience",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "bio",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "emails",
+        "source": "ats_json",
+        "method": "collect_unique"
+      },
+      {
+        "field": "phones",
+        "source": "ats_json",
+        "method": "normalize_e164"
+      },
+      {
+        "field": "location",
+        "source": "ats_json",
+        "method": "normalize_location"
+      },
+      {
+        "field": "skills",
+        "source": "all_sources",
+        "method": "union_normalized"
+      },
+      {
+        "field": "experience",
+        "source": "ats_json",
+        "method": "take_highest_trust"
+      },
+      {
+        "field": "education",
+        "source": "ats_json",
+        "method": "take_highest_trust"
+      }
+    ],
+    "overall_confidence": 0.588,
+    "alternatives": null,
+    "raw_notes": null
+  },
+  {
+    "candidate_id": "C09",
+    "full_name": "Rohit Verma",
+    "emails": [
+      "rohit.verma@example.com"
+    ],
+    "phones": [
+      "+919876510009"
+    ],
+    "location": {
+      "city": "Hyderabad",
+      "region": "India",
+      "country": null
+    },
+    "links": {
+      "linkedin": null,
+      "github": null,
+      "portfolio": null,
+      "other": []
+    },
+    "headline": "Site Reliability Engineer",
+    "years_experience": 3.0,
+    "skills": [
+      "aws",
+      "bash",
+      "docker",
+      "go",
+      "grafana",
+      "kubernetes",
+      "linux",
+      "prometheus",
+      "terraform"
+    ],
+    "experience": [
+      {
+        "company": "Swiggy",
+        "title": "Site Reliability Engineer",
+        "start": "2023-06",
+        "end": null,
+        "summary": "Manages Kubernetes clusters serving food delivery platform. Owns observability stack: Prometheus, Grafana, Loki. Reduced MTTR by 60% through alerting overhaul."
+      },
+      {
+        "company": "Wipro",
+        "title": "DevOps Engineer",
+        "start": "2021-08",
+        "end": "2023-05",
+        "summary": "CI/CD pipeline implementation and cloud infrastructure management on AWS for BFSI clients."
+      }
+    ],
+    "education": [
+      {
+        "institution": "JNTU Hyderabad",
+        "degree": "B.Tech Information Technology",
+        "field": null,
+        "end_year": "2021"
+      }
+    ],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "resume",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "headline",
+        "source": "resume",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "years_experience",
+        "source": "recruiter_csv",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "emails",
+        "source": "resume",
+        "method": "collect_unique"
+      },
+      {
+        "field": "phones",
+        "source": "resume",
+        "method": "normalize_e164"
+      },
+      {
+        "field": "location",
+        "source": "resume",
+        "method": "normalize_location"
+      },
+      {
+        "field": "skills",
+        "source": "all_sources",
+        "method": "union_normalized"
+      },
+      {
+        "field": "experience",
+        "source": "resume",
+        "method": "take_highest_trust"
+      },
+      {
+        "field": "education",
+        "source": "resume",
+        "method": "take_highest_trust"
+      }
+    ],
+    "overall_confidence": 0.622,
+    "alternatives": {
+      "headline": [
+        {
+          "value": "SRE",
+          "source": "recruiter_csv",
+          "trust": 3,
+          "suppressed_reason": "lower_trust"
+        }
+      ]
+    },
+    "raw_notes": null
+  },
+  {
     "candidate_id": "C10",
     "full_name": "TJ Holowaychuk",
     "emails": [
@@ -870,6 +1228,131 @@
         {
           "value": "TJ",
           "source": "github",
+          "trust": 2,
+          "suppressed_reason": "lower_trust"
+        }
+      ]
+    },
+    "raw_notes": null
+  },
+  {
+    "candidate_id": "C11",
+    "full_name": "Meera Iyer",
+    "emails": [
+      "meera.iyer@example.com"
+    ],
+    "phones": [
+      "+919876510011"
+    ],
+    "location": {
+      "city": "Bangalore",
+      "region": "India",
+      "country": null
+    },
+    "links": {
+      "linkedin": null,
+      "github": null,
+      "portfolio": null,
+      "other": []
+    },
+    "headline": "ML Engineer",
+    "years_experience": 3.0,
+    "skills": [
+      "docker",
+      "kafka",
+      "mlflow",
+      "python",
+      "pytorch",
+      "scikit-learn",
+      "spark",
+      "sql",
+      "tensorflow",
+      "nlp",
+      "recommendation systems"
+    ],
+    "experience": [
+      {
+        "company": "Paytm",
+        "title": "ML Engineer",
+        "start": "2023-02",
+        "end": null,
+        "summary": "Builds recommendation and fraud detection models for Paytm's payment platform. Developed real-time feature store reducing model inference latency by 35%."
+      },
+      {
+        "company": "Wipro",
+        "title": "Data Scientist",
+        "start": "2021-06",
+        "end": "2023-01",
+        "summary": "Built NLP document classification models for insurance automation clients."
+      }
+    ],
+    "education": [
+      {
+        "institution": "IISc Bangalore",
+        "degree": "M.Tech Artificial Intelligence",
+        "field": null,
+        "end_year": "2021"
+      },
+      {
+        "institution": "NIT Calicut",
+        "degree": "B.Tech Electronics",
+        "field": null,
+        "end_year": "2019"
+      }
+    ],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "resume",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "headline",
+        "source": "resume",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "years_experience",
+        "source": "recruiter_csv",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "emails",
+        "source": "resume",
+        "method": "collect_unique"
+      },
+      {
+        "field": "phones",
+        "source": "resume",
+        "method": "normalize_e164"
+      },
+      {
+        "field": "location",
+        "source": "resume",
+        "method": "normalize_location"
+      },
+      {
+        "field": "skills",
+        "source": "all_sources",
+        "method": "union_normalized"
+      },
+      {
+        "field": "experience",
+        "source": "resume",
+        "method": "take_highest_trust"
+      },
+      {
+        "field": "education",
+        "source": "resume",
+        "method": "take_highest_trust"
+      }
+    ],
+    "overall_confidence": 0.577,
+    "alternatives": {
+      "headline": [
+        {
+          "value": "Machine Learning Engineer",
+          "source": "linkedin",
           "trust": 2,
           "suppressed_reason": "lower_trust"
         }
@@ -1007,6 +1490,145 @@
     "raw_notes": "Kent on a call 8 May. Not actively looking but open to the right opportunity. Strong preference for remote-first. Very focused on teaching and DX. Would consider Staff Engineer or Educator-in-Residence type role."
   },
   {
+    "candidate_id": "C13",
+    "full_name": "Aditya Rao",
+    "emails": [
+      "aditya.rao@example.com"
+    ],
+    "phones": [
+      "+919876599913"
+    ],
+    "location": {
+      "city": null,
+      "region": null,
+      "country": null
+    },
+    "links": {
+      "linkedin": null,
+      "github": null,
+      "portfolio": null,
+      "other": []
+    },
+    "headline": "Backend Engineer",
+    "years_experience": 4.0,
+    "skills": [
+      "go",
+      "grpc",
+      "kubernetes",
+      "postgres",
+      "redis"
+    ],
+    "experience": [
+      {
+        "company": "PhonePe",
+        "title": "Backend Engineer",
+        "start": "2022-06",
+        "end": null,
+        "summary": "Payment infrastructure services in Go."
+      },
+      {
+        "company": "Ola",
+        "title": "Software Engineer",
+        "start": "2020-07",
+        "end": "2022-05",
+        "summary": "Ride pricing and surge algorithms."
+      }
+    ],
+    "education": [
+      {
+        "institution": "VIT Vellore",
+        "degree": "B.Tech",
+        "field": "Computer Science",
+        "end_year": "2020"
+      }
+    ],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "headline",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "years_experience",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "bio",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "emails",
+        "source": "ats_json",
+        "method": "collect_unique"
+      },
+      {
+        "field": "phones",
+        "source": "ats_json",
+        "method": "normalize_e164"
+      },
+      {
+        "field": "skills",
+        "source": "all_sources",
+        "method": "union_normalized"
+      },
+      {
+        "field": "experience",
+        "source": "ats_json",
+        "method": "take_highest_trust"
+      },
+      {
+        "field": "education",
+        "source": "ats_json",
+        "method": "take_highest_trust"
+      }
+    ],
+    "overall_confidence": 0.538,
+    "alternatives": {
+      "phones": [
+        {
+          "value": "+919876510013",
+          "source": "recruiter_csv",
+          "trust": 3,
+          "suppressed_reason": "in_source_duplicate_older"
+        }
+      ]
+    },
+    "raw_notes": null
+  },
+  {
+    "candidate_id": "C14",
+    "full_name": null,
+    "emails": null,
+    "phones": null,
+    "location": {
+      "city": null,
+      "region": null,
+      "country": null
+    },
+    "links": {
+      "linkedin": null,
+      "github": null,
+      "portfolio": null,
+      "other": []
+    },
+    "headline": null,
+    "years_experience": null,
+    "skills": null,
+    "experience": null,
+    "education": null,
+    "provenance": null,
+    "overall_confidence": 0.5,
+    "alternatives": null,
+    "raw_notes": null
+  },
+  {
     "candidate_id": "C15",
     "full_name": "Tom Preston-Werner",
     "emails": [
@@ -1128,62 +1750,56 @@
     "raw_notes": null
   },
   {
-    "candidate_id": "C20",
-    "full_name": "Paul Irish",
-    "emails": [
-      "paul.i@example.com"
-    ],
+    "candidate_id": "C16",
+    "full_name": "Neha Joshi",
+    "emails": null,
     "phones": [
-      "+14155550120"
+      "+919876510016"
     ],
     "location": {
-      "city": "Mountain View",
-      "region": "CA",
+      "city": "Delhi",
+      "region": "India",
       "country": null
     },
     "links": {
       "linkedin": null,
-      "github": "https://github.com/paulirish",
-      "portfolio": "https://paulirish.com",
-      "other": [
-        "https://paulirish.com"
-      ]
+      "github": null,
+      "portfolio": null,
+      "other": []
     },
-    "headline": "Developer Advocate",
-    "years_experience": 15.0,
+    "headline": "Frontend Engineer",
+    "years_experience": 4.0,
     "skills": [
-      "chrome devtools",
       "css",
-      "devtools protocol",
+      "figma",
       "html",
       "javascript",
-      "lighthouse",
-      "web performance",
-      "shell",
-      "typescript"
+      "react",
+      "redux",
+      "webpack"
     ],
     "experience": [
       {
-        "company": "Google",
-        "title": "Developer Advocate",
-        "start": "2014-01",
+        "company": "Ola",
+        "title": "Frontend Engineer",
+        "start": "2022-01",
         "end": null,
-        "summary": "Advocates for web developers. Contributes to Chrome DevTools, Lighthouse, and web performance standards. Creator of HTML5 Boilerplate."
+        "summary": "Builds driver onboarding and earnings dashboard UIs. Improved page load performance by 30%."
       },
       {
-        "company": "Filament Group",
-        "title": "Lead Developer",
-        "start": "2009-01",
-        "end": "2014-01",
-        "summary": "Front-end development and progressive enhancement consulting for major US clients."
+        "company": "Cognizant",
+        "title": "Frontend Developer",
+        "start": "2020-01",
+        "end": "2022-01",
+        "summary": "Built React components for a US insurance client's self-service portal."
       }
     ],
     "education": [
       {
-        "institution": null,
-        "degree": null,
+        "institution": "Delhi Technological University",
+        "degree": "B.Tech Computer Science",
         "field": null,
-        "end_year": null
+        "end_year": "2020"
       }
     ],
     "provenance": [
@@ -1203,16 +1819,6 @@
         "method": "pick_highest_trust"
       },
       {
-        "field": "bio",
-        "source": "github",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "emails",
-        "source": "resume",
-        "method": "collect_unique"
-      },
-      {
         "field": "phones",
         "source": "resume",
         "method": "normalize_e164"
@@ -1221,11 +1827,6 @@
         "field": "location",
         "source": "resume",
         "method": "normalize_location"
-      },
-      {
-        "field": "links.github",
-        "source": "resume",
-        "method": "extract_url"
       },
       {
         "field": "skills",
@@ -1243,19 +1844,23 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.572,
+    "overall_confidence": 0.624,
     "alternatives": null,
-    "raw_notes": "Spoke to Paul on call. Strong DX background, very articulate. Mentioned interest in dev tooling roles. Notes from screening, 2026-05-10."
+    "raw_notes": null
   },
   {
-    "candidate_id": "C_387BB5",
-    "full_name": null,
-    "emails": null,
-    "phones": null,
+    "candidate_id": "C17",
+    "full_name": "Aman Sharma",
+    "emails": [
+      "aman.sharma17@example.com"
+    ],
+    "phones": [
+      "+919876510017"
+    ],
     "location": {
-      "city": null,
-      "region": null,
-      "country": null
+      "city": "Bangalore",
+      "region": "Karnataka",
+      "country": "IN"
     },
     "links": {
       "linkedin": null,
@@ -1263,18 +1868,206 @@
       "portfolio": null,
       "other": []
     },
-    "headline": null,
-    "years_experience": null,
-    "skills": null,
-    "experience": null,
-    "education": null,
-    "provenance": null,
-    "overall_confidence": 0.5,
+    "headline": "Product Engineer",
+    "years_experience": 5.0,
+    "skills": [
+      "android",
+      "firebase",
+      "java",
+      "kotlin",
+      "rest"
+    ],
+    "experience": [
+      {
+        "company": "Cred",
+        "title": "Product Engineer",
+        "start": "2021-06",
+        "end": null,
+        "summary": "Builds member-facing Android features for the Cred app."
+      },
+      {
+        "company": "Myntra",
+        "title": "Android Engineer",
+        "start": "2019-07",
+        "end": "2021-05",
+        "summary": "Fashion e-commerce Android app features."
+      }
+    ],
+    "education": [
+      {
+        "institution": "Delhi Technological University",
+        "degree": "B.Tech",
+        "field": "Software Engineering",
+        "end_year": "2019"
+      }
+    ],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "headline",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "years_experience",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "bio",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "emails",
+        "source": "ats_json",
+        "method": "collect_unique"
+      },
+      {
+        "field": "phones",
+        "source": "ats_json",
+        "method": "normalize_e164"
+      },
+      {
+        "field": "location",
+        "source": "ats_json",
+        "method": "normalize_location"
+      },
+      {
+        "field": "skills",
+        "source": "all_sources",
+        "method": "union_normalized"
+      },
+      {
+        "field": "experience",
+        "source": "ats_json",
+        "method": "take_highest_trust"
+      },
+      {
+        "field": "education",
+        "source": "ats_json",
+        "method": "take_highest_trust"
+      }
+    ],
+    "overall_confidence": 0.588,
     "alternatives": null,
     "raw_notes": null
   },
   {
-    "candidate_id": "C_628138",
+    "candidate_id": "C18",
+    "full_name": "Amann Sharma",
+    "emails": [
+      "amann.sharma18@example.com"
+    ],
+    "phones": [
+      "+919876510018"
+    ],
+    "location": {
+      "city": "Mumbai",
+      "region": "Maharashtra",
+      "country": "IN"
+    },
+    "links": {
+      "linkedin": null,
+      "github": null,
+      "portfolio": null,
+      "other": []
+    },
+    "headline": "Backend Engineer",
+    "years_experience": 5.0,
+    "skills": [
+      "docker",
+      "java",
+      "kafka",
+      "mysql",
+      "spring"
+    ],
+    "experience": [
+      {
+        "company": "Groww",
+        "title": "Backend Engineer",
+        "start": "2021-06",
+        "end": null,
+        "summary": "Trading engine and portfolio service development."
+      },
+      {
+        "company": "HDFC Securities",
+        "title": "Software Engineer",
+        "start": "2019-07",
+        "end": "2021-05",
+        "summary": "Core banking API development."
+      }
+    ],
+    "education": [
+      {
+        "institution": "Mumbai University",
+        "degree": "B.E.",
+        "field": "Computer Engineering",
+        "end_year": "2019"
+      }
+    ],
+    "provenance": [
+      {
+        "field": "full_name",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "headline",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "years_experience",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "bio",
+        "source": "ats_json",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "emails",
+        "source": "ats_json",
+        "method": "collect_unique"
+      },
+      {
+        "field": "phones",
+        "source": "ats_json",
+        "method": "normalize_e164"
+      },
+      {
+        "field": "location",
+        "source": "ats_json",
+        "method": "normalize_location"
+      },
+      {
+        "field": "skills",
+        "source": "all_sources",
+        "method": "union_normalized"
+      },
+      {
+        "field": "experience",
+        "source": "ats_json",
+        "method": "take_highest_trust"
+      },
+      {
+        "field": "education",
+        "source": "ats_json",
+        "method": "take_highest_trust"
+      }
+    ],
+    "overall_confidence": 0.588,
+    "alternatives": null,
+    "raw_notes": null
+  },
+  {
+    "candidate_id": "C19",
     "full_name": "Divya Pillai",
     "emails": [
       "divya.pillai@example.com"
@@ -1394,56 +2187,62 @@
     "raw_notes": null
   },
   {
-    "candidate_id": "C_6C60F2",
-    "full_name": "Neha Joshi",
-    "emails": null,
+    "candidate_id": "C20",
+    "full_name": "Paul Irish",
+    "emails": [
+      "paul.i@example.com"
+    ],
     "phones": [
-      "+919876510016"
+      "+14155550120"
     ],
     "location": {
-      "city": "Delhi",
-      "region": "India",
+      "city": "Mountain View",
+      "region": "CA",
       "country": null
     },
     "links": {
       "linkedin": null,
-      "github": null,
-      "portfolio": null,
-      "other": []
+      "github": "https://github.com/paulirish",
+      "portfolio": "https://paulirish.com",
+      "other": [
+        "https://paulirish.com"
+      ]
     },
-    "headline": "Frontend Engineer",
-    "years_experience": 4.0,
+    "headline": "Developer Advocate",
+    "years_experience": 15.0,
     "skills": [
+      "chrome devtools",
       "css",
-      "figma",
+      "devtools protocol",
       "html",
       "javascript",
-      "react",
-      "redux",
-      "webpack"
+      "lighthouse",
+      "web performance",
+      "shell",
+      "typescript"
     ],
     "experience": [
       {
-        "company": "Ola",
-        "title": "Frontend Engineer",
-        "start": "2022-01",
+        "company": "Google",
+        "title": "Developer Advocate",
+        "start": "2014-01",
         "end": null,
-        "summary": "Builds driver onboarding and earnings dashboard UIs. Improved page load performance by 30%."
+        "summary": "Advocates for web developers. Contributes to Chrome DevTools, Lighthouse, and web performance standards. Creator of HTML5 Boilerplate."
       },
       {
-        "company": "Cognizant",
-        "title": "Frontend Developer",
-        "start": "2020-01",
-        "end": "2022-01",
-        "summary": "Built React components for a US insurance client's self-service portal."
+        "company": "Filament Group",
+        "title": "Lead Developer",
+        "start": "2009-01",
+        "end": "2014-01",
+        "summary": "Front-end development and progressive enhancement consulting for major US clients."
       }
     ],
     "education": [
       {
-        "institution": "Delhi Technological University",
-        "degree": "B.Tech Computer Science",
+        "institution": null,
+        "degree": null,
         "field": null,
-        "end_year": "2020"
+        "end_year": null
       }
     ],
     "provenance": [
@@ -1463,6 +2262,16 @@
         "method": "pick_highest_trust"
       },
       {
+        "field": "bio",
+        "source": "github",
+        "method": "pick_highest_trust"
+      },
+      {
+        "field": "emails",
+        "source": "resume",
+        "method": "collect_unique"
+      },
+      {
         "field": "phones",
         "source": "resume",
         "method": "normalize_e164"
@@ -1471,6 +2280,11 @@
         "field": "location",
         "source": "resume",
         "method": "normalize_location"
+      },
+      {
+        "field": "links.github",
+        "source": "resume",
+        "method": "extract_url"
       },
       {
         "field": "skills",
@@ -1488,822 +2302,8 @@
         "method": "take_highest_trust"
       }
     ],
-    "overall_confidence": 0.624,
+    "overall_confidence": 0.572,
     "alternatives": null,
-    "raw_notes": null
-  },
-  {
-    "candidate_id": "C_6DC974",
-    "full_name": "Meera Iyer",
-    "emails": [
-      "meera.iyer@example.com"
-    ],
-    "phones": [
-      "+919876510011"
-    ],
-    "location": {
-      "city": "Bangalore",
-      "region": "India",
-      "country": null
-    },
-    "links": {
-      "linkedin": null,
-      "github": null,
-      "portfolio": null,
-      "other": []
-    },
-    "headline": "ML Engineer",
-    "years_experience": 3.0,
-    "skills": [
-      "docker",
-      "kafka",
-      "mlflow",
-      "python",
-      "pytorch",
-      "scikit-learn",
-      "spark",
-      "sql",
-      "tensorflow",
-      "nlp",
-      "recommendation systems"
-    ],
-    "experience": [
-      {
-        "company": "Paytm",
-        "title": "ML Engineer",
-        "start": "2023-02",
-        "end": null,
-        "summary": "Builds recommendation and fraud detection models for Paytm's payment platform. Developed real-time feature store reducing model inference latency by 35%."
-      },
-      {
-        "company": "Wipro",
-        "title": "Data Scientist",
-        "start": "2021-06",
-        "end": "2023-01",
-        "summary": "Built NLP document classification models for insurance automation clients."
-      }
-    ],
-    "education": [
-      {
-        "institution": "IISc Bangalore",
-        "degree": "M.Tech Artificial Intelligence",
-        "field": null,
-        "end_year": "2021"
-      },
-      {
-        "institution": "NIT Calicut",
-        "degree": "B.Tech Electronics",
-        "field": null,
-        "end_year": "2019"
-      }
-    ],
-    "provenance": [
-      {
-        "field": "full_name",
-        "source": "resume",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "headline",
-        "source": "resume",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "years_experience",
-        "source": "recruiter_csv",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "emails",
-        "source": "resume",
-        "method": "collect_unique"
-      },
-      {
-        "field": "phones",
-        "source": "resume",
-        "method": "normalize_e164"
-      },
-      {
-        "field": "location",
-        "source": "resume",
-        "method": "normalize_location"
-      },
-      {
-        "field": "skills",
-        "source": "all_sources",
-        "method": "union_normalized"
-      },
-      {
-        "field": "experience",
-        "source": "resume",
-        "method": "take_highest_trust"
-      },
-      {
-        "field": "education",
-        "source": "resume",
-        "method": "take_highest_trust"
-      }
-    ],
-    "overall_confidence": 0.577,
-    "alternatives": {
-      "headline": [
-        {
-          "value": "Machine Learning Engineer",
-          "source": "linkedin",
-          "trust": 2,
-          "suppressed_reason": "lower_trust"
-        }
-      ]
-    },
-    "raw_notes": null
-  },
-  {
-    "candidate_id": "C_90632B",
-    "full_name": "Aditya Rao",
-    "emails": [
-      "aditya.rao@example.com"
-    ],
-    "phones": [
-      "+919876599913"
-    ],
-    "location": {
-      "city": null,
-      "region": null,
-      "country": null
-    },
-    "links": {
-      "linkedin": null,
-      "github": null,
-      "portfolio": null,
-      "other": []
-    },
-    "headline": "Backend Engineer",
-    "years_experience": 4.0,
-    "skills": [
-      "go",
-      "grpc",
-      "kubernetes",
-      "postgres",
-      "redis"
-    ],
-    "experience": [
-      {
-        "company": "PhonePe",
-        "title": "Backend Engineer",
-        "start": "2022-06",
-        "end": null,
-        "summary": "Payment infrastructure services in Go."
-      },
-      {
-        "company": "Ola",
-        "title": "Software Engineer",
-        "start": "2020-07",
-        "end": "2022-05",
-        "summary": "Ride pricing and surge algorithms."
-      }
-    ],
-    "education": [
-      {
-        "institution": "VIT Vellore",
-        "degree": "B.Tech",
-        "field": "Computer Science",
-        "end_year": "2020"
-      }
-    ],
-    "provenance": [
-      {
-        "field": "full_name",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "headline",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "years_experience",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "bio",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "emails",
-        "source": "ats_json",
-        "method": "collect_unique"
-      },
-      {
-        "field": "phones",
-        "source": "ats_json",
-        "method": "normalize_e164"
-      },
-      {
-        "field": "skills",
-        "source": "all_sources",
-        "method": "union_normalized"
-      },
-      {
-        "field": "experience",
-        "source": "ats_json",
-        "method": "take_highest_trust"
-      },
-      {
-        "field": "education",
-        "source": "ats_json",
-        "method": "take_highest_trust"
-      }
-    ],
-    "overall_confidence": 0.538,
-    "alternatives": {
-      "phones": [
-        {
-          "value": "+919876510013",
-          "source": "recruiter_csv",
-          "trust": 3,
-          "suppressed_reason": "in_source_duplicate_older"
-        }
-      ]
-    },
-    "raw_notes": null
-  },
-  {
-    "candidate_id": "C_9486AB",
-    "full_name": "Arjun Mehta",
-    "emails": [
-      "arjun.mehta@example.com"
-    ],
-    "phones": [
-      "+919876512345",
-      "+919876510007"
-    ],
-    "location": {
-      "city": "Bangalore",
-      "region": "India",
-      "country": null
-    },
-    "links": {
-      "linkedin": null,
-      "github": null,
-      "portfolio": null,
-      "other": []
-    },
-    "headline": "SDE 2",
-    "years_experience": 4.0,
-    "skills": [
-      "celery",
-      "kafka",
-      "django",
-      "docker",
-      "postgres",
-      "python",
-      "redis",
-      "rest"
-    ],
-    "experience": [
-      {
-        "company": "Flipkart",
-        "title": "SDE 2",
-        "start": "2022-03",
-        "end": null,
-        "summary": "Own order management service handling 500k daily orders. Led migration from monolith to microservices. Reduced service error rate from 0.8% to 0.05%."
-      },
-      {
-        "company": "TCS",
-        "title": "Software Engineer",
-        "start": "2020-07",
-        "end": "2022-02",
-        "summary": "Enterprise Java development for a UK retail client. Maintained and extended Spring MVC application serving 5M users."
-      }
-    ],
-    "education": [
-      {
-        "institution": "BITS Pilani",
-        "degree": "B.E. Computer Science",
-        "field": null,
-        "end_year": "2020"
-      }
-    ],
-    "provenance": [
-      {
-        "field": "full_name",
-        "source": "resume",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "headline",
-        "source": "resume",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "years_experience",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "bio",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "emails",
-        "source": "resume",
-        "method": "collect_unique"
-      },
-      {
-        "field": "phones",
-        "source": "resume",
-        "method": "normalize_e164"
-      },
-      {
-        "field": "location",
-        "source": "resume",
-        "method": "normalize_location"
-      },
-      {
-        "field": "skills",
-        "source": "all_sources",
-        "method": "union_normalized"
-      },
-      {
-        "field": "experience",
-        "source": "resume",
-        "method": "take_highest_trust"
-      },
-      {
-        "field": "education",
-        "source": "resume",
-        "method": "take_highest_trust"
-      }
-    ],
-    "overall_confidence": 0.652,
-    "alternatives": {
-      "headline": [
-        {
-          "value": "Senior SDE",
-          "source": "ats_json",
-          "trust": 4,
-          "suppressed_reason": "lower_trust"
-        }
-      ],
-      "phones": [
-        {
-          "value": "+919876510007",
-          "source": "ats_json",
-          "trust": 4,
-          "suppressed_reason": "conflict_different_number",
-          "note": "primary from resume (trust=5)"
-        }
-      ]
-    },
-    "raw_notes": null
-  },
-  {
-    "candidate_id": "C_A80D6E",
-    "full_name": "Rohit Verma",
-    "emails": [
-      "rohit.verma@example.com"
-    ],
-    "phones": [
-      "+919876510009"
-    ],
-    "location": {
-      "city": "Hyderabad",
-      "region": "India",
-      "country": null
-    },
-    "links": {
-      "linkedin": null,
-      "github": null,
-      "portfolio": null,
-      "other": []
-    },
-    "headline": "Site Reliability Engineer",
-    "years_experience": 3.0,
-    "skills": [
-      "aws",
-      "bash",
-      "docker",
-      "go",
-      "grafana",
-      "kubernetes",
-      "linux",
-      "prometheus",
-      "terraform"
-    ],
-    "experience": [
-      {
-        "company": "Swiggy",
-        "title": "Site Reliability Engineer",
-        "start": "2023-06",
-        "end": null,
-        "summary": "Manages Kubernetes clusters serving food delivery platform. Owns observability stack: Prometheus, Grafana, Loki. Reduced MTTR by 60% through alerting overhaul."
-      },
-      {
-        "company": "Wipro",
-        "title": "DevOps Engineer",
-        "start": "2021-08",
-        "end": "2023-05",
-        "summary": "CI/CD pipeline implementation and cloud infrastructure management on AWS for BFSI clients."
-      }
-    ],
-    "education": [
-      {
-        "institution": "JNTU Hyderabad",
-        "degree": "B.Tech Information Technology",
-        "field": null,
-        "end_year": "2021"
-      }
-    ],
-    "provenance": [
-      {
-        "field": "full_name",
-        "source": "resume",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "headline",
-        "source": "resume",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "years_experience",
-        "source": "recruiter_csv",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "emails",
-        "source": "resume",
-        "method": "collect_unique"
-      },
-      {
-        "field": "phones",
-        "source": "resume",
-        "method": "normalize_e164"
-      },
-      {
-        "field": "location",
-        "source": "resume",
-        "method": "normalize_location"
-      },
-      {
-        "field": "skills",
-        "source": "all_sources",
-        "method": "union_normalized"
-      },
-      {
-        "field": "experience",
-        "source": "resume",
-        "method": "take_highest_trust"
-      },
-      {
-        "field": "education",
-        "source": "resume",
-        "method": "take_highest_trust"
-      }
-    ],
-    "overall_confidence": 0.622,
-    "alternatives": {
-      "headline": [
-        {
-          "value": "SRE",
-          "source": "recruiter_csv",
-          "trust": 3,
-          "suppressed_reason": "lower_trust"
-        }
-      ]
-    },
-    "raw_notes": null
-  },
-  {
-    "candidate_id": "C_BFF307",
-    "full_name": "Sara Khan",
-    "emails": [
-      "sara.khan@example.com"
-    ],
-    "phones": [
-      "+919876510008"
-    ],
-    "location": {
-      "city": "Mumbai",
-      "region": "Maharashtra",
-      "country": "IN"
-    },
-    "links": {
-      "linkedin": null,
-      "github": null,
-      "portfolio": null,
-      "other": []
-    },
-    "headline": "Data Engineer",
-    "years_experience": 5.0,
-    "skills": [
-      "airflow",
-      "dbt",
-      "kafka",
-      "python",
-      "spark",
-      "sql"
-    ],
-    "experience": [
-      {
-        "company": "Zomato",
-        "title": "Data Engineer",
-        "start": "2022-01",
-        "end": null,
-        "summary": "Builds and maintains real-time data pipelines for restaurant analytics."
-      },
-      {
-        "company": "Accenture",
-        "title": "Data Analyst",
-        "start": "2020-06",
-        "end": "2021-12",
-        "summary": "BI reporting and ETL pipeline work for FMCG clients."
-      }
-    ],
-    "education": [
-      {
-        "institution": "Symbiosis Institute of Technology",
-        "degree": "B.Tech",
-        "field": "Information Technology",
-        "end_year": "2020"
-      }
-    ],
-    "provenance": [
-      {
-        "field": "full_name",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "headline",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "years_experience",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "bio",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "emails",
-        "source": "ats_json",
-        "method": "collect_unique"
-      },
-      {
-        "field": "phones",
-        "source": "ats_json",
-        "method": "normalize_e164"
-      },
-      {
-        "field": "location",
-        "source": "ats_json",
-        "method": "normalize_location"
-      },
-      {
-        "field": "skills",
-        "source": "all_sources",
-        "method": "union_normalized"
-      },
-      {
-        "field": "experience",
-        "source": "ats_json",
-        "method": "take_highest_trust"
-      },
-      {
-        "field": "education",
-        "source": "ats_json",
-        "method": "take_highest_trust"
-      }
-    ],
-    "overall_confidence": 0.588,
-    "alternatives": null,
-    "raw_notes": null
-  },
-  {
-    "candidate_id": "C_E4A68E",
-    "full_name": "Amann Sharma",
-    "emails": [
-      "amann.sharma18@example.com"
-    ],
-    "phones": [
-      "+919876510018"
-    ],
-    "location": {
-      "city": "Mumbai",
-      "region": "Maharashtra",
-      "country": "IN"
-    },
-    "links": {
-      "linkedin": null,
-      "github": null,
-      "portfolio": null,
-      "other": []
-    },
-    "headline": "Backend Engineer",
-    "years_experience": 5.0,
-    "skills": [
-      "docker",
-      "java",
-      "kafka",
-      "mysql",
-      "spring"
-    ],
-    "experience": [
-      {
-        "company": "Groww",
-        "title": "Backend Engineer",
-        "start": "2021-06",
-        "end": null,
-        "summary": "Trading engine and portfolio service development."
-      },
-      {
-        "company": "HDFC Securities",
-        "title": "Software Engineer",
-        "start": "2019-07",
-        "end": "2021-05",
-        "summary": "Core banking API development."
-      }
-    ],
-    "education": [
-      {
-        "institution": "Mumbai University",
-        "degree": "B.E.",
-        "field": "Computer Engineering",
-        "end_year": "2019"
-      }
-    ],
-    "provenance": [
-      {
-        "field": "full_name",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "headline",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "years_experience",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "bio",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "emails",
-        "source": "ats_json",
-        "method": "collect_unique"
-      },
-      {
-        "field": "phones",
-        "source": "ats_json",
-        "method": "normalize_e164"
-      },
-      {
-        "field": "location",
-        "source": "ats_json",
-        "method": "normalize_location"
-      },
-      {
-        "field": "skills",
-        "source": "all_sources",
-        "method": "union_normalized"
-      },
-      {
-        "field": "experience",
-        "source": "ats_json",
-        "method": "take_highest_trust"
-      },
-      {
-        "field": "education",
-        "source": "ats_json",
-        "method": "take_highest_trust"
-      }
-    ],
-    "overall_confidence": 0.588,
-    "alternatives": null,
-    "raw_notes": null
-  },
-  {
-    "candidate_id": "C_F17195",
-    "full_name": "Aman Sharma",
-    "emails": [
-      "aman.sharma17@example.com"
-    ],
-    "phones": [
-      "+919876510017"
-    ],
-    "location": {
-      "city": "Bangalore",
-      "region": "Karnataka",
-      "country": "IN"
-    },
-    "links": {
-      "linkedin": null,
-      "github": null,
-      "portfolio": null,
-      "other": []
-    },
-    "headline": "Product Engineer",
-    "years_experience": 5.0,
-    "skills": [
-      "android",
-      "firebase",
-      "java",
-      "kotlin",
-      "rest"
-    ],
-    "experience": [
-      {
-        "company": "Cred",
-        "title": "Product Engineer",
-        "start": "2021-06",
-        "end": null,
-        "summary": "Builds member-facing Android features for the Cred app."
-      },
-      {
-        "company": "Myntra",
-        "title": "Android Engineer",
-        "start": "2019-07",
-        "end": "2021-05",
-        "summary": "Fashion e-commerce Android app features."
-      }
-    ],
-    "education": [
-      {
-        "institution": "Delhi Technological University",
-        "degree": "B.Tech",
-        "field": "Software Engineering",
-        "end_year": "2019"
-      }
-    ],
-    "provenance": [
-      {
-        "field": "full_name",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "headline",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "years_experience",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "bio",
-        "source": "ats_json",
-        "method": "pick_highest_trust"
-      },
-      {
-        "field": "emails",
-        "source": "ats_json",
-        "method": "collect_unique"
-      },
-      {
-        "field": "phones",
-        "source": "ats_json",
-        "method": "normalize_e164"
-      },
-      {
-        "field": "location",
-        "source": "ats_json",
-        "method": "normalize_location"
-      },
-      {
-        "field": "skills",
-        "source": "all_sources",
-        "method": "union_normalized"
-      },
-      {
-        "field": "experience",
-        "source": "ats_json",
-        "method": "take_highest_trust"
-      },
-      {
-        "field": "education",
-        "source": "ats_json",
-        "method": "take_highest_trust"
-      }
-    ],
-    "overall_confidence": 0.588,
-    "alternatives": null,
-    "raw_notes": null
+    "raw_notes": "Spoke to Paul on call. Strong DX background, very articulate. Mentioned interest in dev tooling roles. Notes from screening, 2026-05-10."
   }
 ]

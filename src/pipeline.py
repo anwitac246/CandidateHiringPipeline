@@ -121,7 +121,7 @@ def get_pipeline_steps(sources_dir: Path, config: dict | None = None) -> list[di
             candidate_norm.append(norm_rec)
 
         # Step 3: Merged Canonical Record
-        merged_cand = merger._merge_group(group_key, records)
+        merged_cand = merger._merge_group(group_key, records, candidate_index)
 
         # Step 4: Projected Record
         projected = project(merged_cand, config)

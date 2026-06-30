@@ -35,11 +35,15 @@ def _parse_resume(path: Path) -> dict | None:
         print(f"[resume_ingestor] could not read {path.name}: {exc}")
         return None
 
+    # Extract candidate_id_hint from filename (e.g. C14 from C14.txt)
+    candidate_id_hint = path.stem if re.match(r"^C\d{2}$", path.stem) else None
+
     if not text:
         print(f"[resume_ingestor] {path.name} is empty, returning null record")
         return {
             "source": SOURCE_NAME,
             "source_file": path.name,
+            "candidate_id_hint": candidate_id_hint,
             "trust_score": TRUST_SCORE,
             "full_name": None,
             "email": None,
@@ -64,6 +68,7 @@ def _parse_resume(path: Path) -> dict | None:
     return {
         "source": SOURCE_NAME,
         "source_file": path.name,
+        "candidate_id_hint": candidate_id_hint,
         "trust_score": TRUST_SCORE,
         "full_name": _extract_name(header_block),
         "email": emails[0] if emails else None,
