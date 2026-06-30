@@ -18,6 +18,12 @@ A pipeline that ingests candidate data from multiple structured (CSV, ATS JSON) 
 
 No external web framework, no ORM, no database. The pipeline is a pure Python process.
 
+
+https://github.com/user-attachments/assets/fb3fa98e-be11-4076-8211-91e791d7cbe6
+
+
+
+
 ---
 
 ## 1. System Architecture
