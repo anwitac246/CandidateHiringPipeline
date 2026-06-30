@@ -754,12 +754,33 @@ def write_recruiter_notes():
         path.write_text(text, encoding="utf-8")
 
 
+def write_candidate_index():
+    seen = {}
+    for row in CSV_ROWS:
+        cid = row["candidate_id"]
+        if cid not in seen:
+            seen[cid] = {
+                "full_name": row["full_name"],
+                "email": row["email"] or None,
+            }
+    additional = [
+        ("C06", {"full_name": "Addy Osmani", "email": None}),
+        ("C14", {"full_name": None, "email": None}),
+    ]
+    for cid, info in additional:
+        if cid not in seen:
+            seen[cid] = info
+    path = SRC / "candidate_index.json"
+    path.write_text(json.dumps(seen, indent=2, sort_keys=True), encoding="utf-8")
+
+
 def main():
     write_csv()
     write_ats()
     write_resumes()
     write_linkedin()
     write_recruiter_notes()
+    write_candidate_index()
     print("enriched synthetic data written for all candidates")
 
 
