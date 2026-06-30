@@ -36,7 +36,7 @@ GITHUB_USERS = {
     "C10": "tj",
     "C12": "kentcdodds",
     "C15": "mojombo",
-    "C20": "addyosmani",
+    "C20": "paulirish",
 }
 
 OUT_DIR = Path(__file__).resolve().parent.parent / "data" / "sources" / "github"

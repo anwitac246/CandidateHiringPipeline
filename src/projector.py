@@ -21,6 +21,8 @@ DEFAULT_CONFIG: dict = {
         {"path": "education",         "type": "object[]"},
         {"path": "provenance",        "type": "object[]"},
         {"path": "overall_confidence","type": "number"},
+        {"path": "alternatives",      "type": "object",   "on_missing": "omit"},
+        {"path": "raw_notes",         "type": "string",   "on_missing": "omit"},
     ],
     "include_confidence": True,
     "include_provenance": True,
@@ -60,14 +62,6 @@ def project(record: CandidateRecord, config: dict) -> dict:
 
     if include_provenance and "provenance" not in output:
         output["provenance"] = [p.model_dump() for p in record.provenance]
-
-    if record.alternatives:
-        filled = {k: v for k, v in record.alternatives.items() if v}
-        if filled:
-            output["alternatives"] = filled
-
-    if record.raw_notes:
-        output["raw_notes"] = record.raw_notes
 
     return output
 

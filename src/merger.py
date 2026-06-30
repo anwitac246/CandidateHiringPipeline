@@ -202,7 +202,8 @@ def _dedup_within_source(records: list[dict]) -> list[dict]:
     """
     Within each source, if two records share the same email, keep the most
     recent (by last_updated). The older record's differing fields are logged
-    as alternatives on the winner. This handles the C13 duplicate-CSV-row case.
+    as alternatives on the winner. Handles in-source duplicate rows where a
+    candidate appears twice in the same feed with different timestamps.
     """
     by_source: dict[str, list[dict]] = defaultdict(list)
     for r in records:
@@ -561,26 +562,29 @@ def _score_confidence(
     experience: list,
     alternatives: dict,
 ) -> float:
-    score = 1.0
+    # Base: 0.5. Built upward by source diversity and field completeness,
+    # then scaled by average source trust, then penalized by conflicts.
+    # Starting at 0.5 (not 1.0) ensures the multi-source bonus is visible.
+    score = 0.5
     source_count = len({r.get("source") for r in records})
     score += min(0.1 * (source_count - 1), 0.3)
 
-    if not full_name:
-        score -= 0.2
-    if not emails:
-        score -= 0.15
-    if not phones:
-        score -= 0.05
-    if not skills:
-        score -= 0.1
-    if not experience:
-        score -= 0.1
-
-    conflict_count = sum(len(v) for v in alternatives.values())
-    score -= 0.05 * conflict_count
+    if full_name:
+        score += 0.08
+    if emails:
+        score += 0.06
+    if phones:
+        score += 0.02
+    if skills:
+        score += 0.04
+    if experience:
+        score += 0.04
 
     avg_trust = sum(TRUST_RANK.get(r.get("source", ""), 0) for r in records) / max(len(records), 1)
     score *= avg_trust / 5.0
+
+    conflict_count = sum(len(v) for v in alternatives.values())
+    score -= 0.05 * conflict_count
 
     return max(0.0, min(1.0, score))
 

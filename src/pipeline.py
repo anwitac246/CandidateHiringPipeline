@@ -49,8 +49,8 @@ def run_pipeline(sources_dir: Path, config: dict | None = None) -> list[dict[str
     # Project and validate candidates
     projected_results = []
     for cand in merged_candidates:
-        # Check C14 edge case where resume is empty string and there are no other sources
-        # If it is a null profile (all fields None except candidate_id), we handle it
+        # Null profiles (empty resume with no other sources) pass through with
+        # only candidate_id set; all other fields remain None.
         projected = project(cand, config)
         validate(projected, config)
         projected_results.append(projected)

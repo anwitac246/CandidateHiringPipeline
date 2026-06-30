@@ -317,10 +317,23 @@ def _education_block(block: str) -> dict:
     clean = re.sub(r"\b(?:19|20)\d{2}\b", "", text)
     clean = re.sub(r"CGPA[^,]*", "", clean, flags=re.IGNORECASE)
     clean = clean.strip(" ,.-/")
-    parts = [p.strip() for p in re.split(r"[,\u2014\-]", clean) if p.strip()]
+
+    # Guard: "self-taught" / "no formal degree" lines should not be split
+    if re.search(r"self.?taught|no formal degree", clean, re.IGNORECASE):
+        return {
+            "institution": None,
+            "degree": None,
+            "field": None,
+            "end_year": end_year,
+            "raw": block.strip(),
+        }
+
+    # Only split on separators that are surrounded by spaces or are em-dash,
+    # so hyphens within words (Self-taught, B-Tech) are not wrongly split.
+    parts = [p.strip() for p in re.split(r"\s*[,\u2014]\s*|\s+\-\s+", clean) if p.strip()]
     return {
         "institution": parts[-1] if parts else None,
-        "degree": parts[0] if len(parts) > 1 else None,
+        "degree": parts[0] if len(parts) > 1 else (parts[0] if parts else None),
         "field": parts[1] if len(parts) > 2 else None,
         "end_year": end_year,
         "raw": block.strip(),

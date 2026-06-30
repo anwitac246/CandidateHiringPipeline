@@ -40,18 +40,33 @@ def normalize_skill(raw: str) -> str:
     return raw.strip().lower()
 
 
+_INDIAN_MOBILE_PREFIXES = {
+    "60", "61", "62", "63", "64", "65", "66", "67", "68", "69",
+    "70", "71", "72", "73", "74", "75", "76", "77", "78", "79",
+    "80", "81", "82", "83", "84", "85", "86", "87", "88", "89",
+    "90", "91", "92", "93", "94", "95", "96", "97", "98", "99",
+}
+
+
 def normalize_phone(raw: str) -> str | None:
     if not raw or not raw.strip():
         return None
     digits = re.sub(r"\D", "", raw.strip())
     if not digits:
         return None
-    if len(digits) == 11 and digits.startswith("0"):
-        digits = digits[1:]
+    # Explicit country code: trust the + prefix as-is.
     if raw.strip().startswith("+"):
         return "+" + digits
+    # Leading-zero Indian format (e.g. 098765 10011 → 11 digits starting with 0).
+    if len(digits) == 11 and digits.startswith("0"):
+        digits = digits[1:]
     if len(digits) == 10:
-        if digits.startswith("98765"):
+        # Bare 10-digit numbers are ambiguous. Use first-two-digit prefix to
+        # distinguish Indian mobile (6x-9x series) from US/NANP (2x-9x).
+        # This heuristic is correct for all Indian mobile numbers in scope.
+        # Limitation: cannot disambiguate 10-digit Indian vs. US if prefix
+        # overlaps (e.g. 91x... could be NANP 914 area code).
+        if digits[:2] in _INDIAN_MOBILE_PREFIXES and not digits.startswith("1"):
             return "+91" + digits
         return "+1" + digits
     if len(digits) == 11 and digits.startswith("1"):
@@ -61,6 +76,7 @@ def normalize_phone(raw: str) -> str | None:
     if len(digits) >= 10:
         return "+" + digits
     return None
+
 
 
 _MONTH_MAP = {
